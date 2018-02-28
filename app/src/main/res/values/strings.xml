@@ -1,0 +1,26 @@
+<resources>
+  <string name="app_name">宠乐</string>
+
+  <string name="yq_pop_authorization_title">授权提醒</string>
+  <string name="yq_pop_authorization_tips">申请借款，需要同意“宠乐”访问您的通讯录及地理位置,请打开您的相关权限后才能完成借款</string>
+  <string name="yq_pop_authorization_contacts_tips">申请借款，需要同意“宠乐”访问您的通讯录,请打开您的相关权限后才能完成借款</string>
+  <string name="yq_pop_authorization_location_tips">申请借款，需要同意“宠乐”访问您的地理位置,请打开您的相关权限后才能完成借款</string>
+  <string name="yq_pop_authorization_location_error_tips">获取地理位置失败，请确保您已经授权获取地理位置权限，然后才能借款</string>
+  <string name="yq_pop_authorization_contact_error_tips">获取通讯录失败，授权获取通讯录权限后才能借款</string>
+  <string name="yq_pop_authorization_contact_null_tips">获取通讯录失败，请确保您已经授权读取通讯录权限，然后检查您的通讯录中是否存在两位以上联系人以及通话记录</string>
+  <string name="yq_login_pwd_tips">密码为6–16位数字与字母组合</string>
+  <string name="yq_login_only_can_input">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`¬!"？，。；‘“：£$%^*()~=#{}[];':,./?/*-_+&#060;&#062;&#064;&#038;</string>
+
+  <string name="yq_identity_username">真实姓名</string>
+
+  <string-array name="pet_gender">
+    <item>公</item>
+    <item>母</item>
+  </string-array>
+
+  <string-array name="gender">
+    <item>男</item>
+    <item>女</item>
+  </string-array>
+
+</resources>

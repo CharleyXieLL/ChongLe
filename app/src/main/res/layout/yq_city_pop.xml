@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/yj_relat_pop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="140dp"
+    android:paddingTop="140dp"
+    >
+
+  <LinearLayout
+      android:layout_width="240dp"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:background="@drawable/yq_shape_8r_white"
+      android:orientation="vertical"
+      android:paddingBottom="10dp"
+      >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/yq_shape_8r_white"
+        android:visibility="visible"
+        >
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="fill_parent"
+          android:clickable="true"
+          android:gravity="center"
+          android:text="请选择"
+          android:textColor="@color/yq_text_color_blank"
+          android:textSize="14sp"
+          android:textStyle="bold"
+          />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/text_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        />
+  </LinearLayout>
+
+</RelativeLayout>

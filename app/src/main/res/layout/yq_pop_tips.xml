@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <LinearLayout
+      android:layout_width="230dp"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerInParent="true"
+      android:layout_marginLeft="55dp"
+      android:layout_marginRight="55dp"
+      android:orientation="vertical"
+      >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yq_shape_radius_10"
+        >
+
+      <TextView
+          android:id="@+id/tv_tips"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"
+          android:layout_marginTop="20dp"
+          android:gravity="center"
+          android:lineSpacingExtra="8dp"
+          android:textColor="@color/yq_text_color_blank"
+          android:textSize="14sp"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="41dp"
+          android:layout_below="@+id/tv_tips"
+          android:layout_marginTop="20dp"
+          android:orientation="vertical"
+          >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/yq_c_bg"
+            />
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/yq_select_btn"
+            android:gravity="center"
+            android:text="知道了"
+            android:textColor="@color/yq_loading_9"
+            android:textSize="14sp"
+            />
+      </LinearLayout>
+    </RelativeLayout>
+  </LinearLayout>
+</RelativeLayout>

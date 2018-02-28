@@ -1,0 +1,21 @@
+<resources>
+  <dimen name="yq_title_height">50dip</dimen>
+
+  <dimen name="yq_activity_horizontal_margin">16dp</dimen>
+  <dimen name="yq_activity_vertical_margin">16dp</dimen>
+  <dimen name="yq_20sp">20sp</dimen>
+  <dimen name="yq_24sp">24sp</dimen>
+  <dimen name="yq_tv_limit_assess">30sp</dimen>
+  <dimen name="yq_display2">48sp</dimen>
+  <dimen name="yq_40sp">40sp</dimen>
+  <dimen name="yq_headline">18sp</dimen>
+  <dimen name="yq_title">16sp</dimen>
+  <dimen name="yq_form">15sp</dimen>
+  <dimen name="yq_body">14sp</dimen>
+  <dimen name="yq_caption">13sp</dimen>
+  <dimen name="yq_footnote">12sp</dimen>
+  <dimen name="yq_comm_btn_width">259dp</dimen>
+  <dimen name="yq_comm_btn_height">39dp</dimen>
+  <dimen name="yq_pop_width">253dp</dimen>
+  <dimen name="yq_10sp">10sp</dimen>
+</resources>

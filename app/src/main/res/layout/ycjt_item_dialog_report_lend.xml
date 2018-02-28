@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relat_item_report_lend_people_root"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@drawable/yj_pressed"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    >
+
+  <TextView
+      android:id="@+id/tv_item_report_lend_people"
+      tools:text="收款押金和中介费"
+      style="@style/yq_text_black"
+      android:layout_centerVertical="true"
+      android:lineSpacingExtra="7dp"
+      />
+
+  <View style="@style/yq_line_style"
+      android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

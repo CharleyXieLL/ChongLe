@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yq_c_bg"
+    android:orientation="vertical"
+    >
+
+  <com.youth.banner.Banner
+      android:id="@+id/fragment_store_banner"
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:layout_marginBottom="7.5dp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:orientation="horizontal"
+      android:paddingTop="20dp"
+      >
+
+    <LinearLayout
+        android:id="@+id/layout_store_zhu_liang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/zhuliang"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="主粮"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_lingshi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/lingshi"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="零食"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_wanju"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/wanju"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="玩具"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_yiliao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/yiliao"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="医疗"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:orientation="horizontal"
+      android:paddingBottom="20dp"
+      android:paddingTop="10dp"
+      >
+
+    <LinearLayout
+        android:id="@+id/layout_store_fushi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/fushi"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="服饰"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_qingjie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/qingjie"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="清洁"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_jiaju"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/jiaju"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="家居"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_store_yingyang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@mipmap/yingyang"
+          />
+
+      <TextView
+          android:layout_gravity="center_horizontal"
+          android:text="营养"
+          android:textSize="14sp"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/white"
+      android:orientation="horizontal"
+      >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/yq_c_bg"
+        />
+  </LinearLayout>
+
+
+  <TextView
+      android:layout_width="match_parent"
+      android:background="@color/white"
+      android:gravity="left"
+      android:paddingLeft="20dp"
+      android:paddingTop="16dp"
+      android:text="热门推荐"
+      style="@style/yq_text_black"
+      />
+
+  <HorizontalScrollView
+      android:id="@+id/horizontal_scrollView_store"
+      android:layout_width="match_parent"
+      android:layout_height="160dp"
+      android:background="@color/white"
+      android:paddingTop="16dp"
+      />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:background="@color/white"
+      android:gravity="left"
+      android:paddingLeft="20dp"
+      android:paddingTop="16dp"
+      android:text="他们都在看"
+      style="@style/yq_text_black"
+      />
+
+</LinearLayout>

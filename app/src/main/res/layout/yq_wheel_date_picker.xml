@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <LinearLayout
+      android:id="@+id/ll"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@color/white"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      >
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/year"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        />
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/month"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        />
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/day"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingRight="20dp"
+        />
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:visibility="gone"
+        />
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/min"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:visibility="gone"
+        />
+
+    <com.jiajia.badou.view.wheelview.WheelView
+        android:id="@+id/sec"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:visibility="gone"
+        />
+  </LinearLayout>
+
+  <RelativeLayout
+      android:id="@+id/rl_done"
+      android:layout_width="fill_parent"
+      android:layout_height="50dp"
+      android:layout_above="@id/ll"
+      android:background="@color/yq_c_bg"
+      >
+
+    <TextView
+        android:id="@+id/done"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="@color/yq_color_a0a0a0"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:id="@+id/choose_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/yq_text_color_blank"
+        android:textSize="18sp"
+        tools:text="请选择出生日期"
+        />
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/yq_color_a0a0a0"
+        android:textSize="18sp"
+        />
+  </RelativeLayout>
+
+</RelativeLayout>
