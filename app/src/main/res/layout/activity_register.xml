@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@color/main_check_true"
+      >
+    <RelativeLayout
+        android:id="@+id/layout_register_back"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        >
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:src="@mipmap/yj_return_back_white"
+          />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="注册"
+        android:textColor="@color/white"
+        android:textSize="@dimen/yq_headline"
+        style="@style/yq_text_black"
+        />
+  </RelativeLayout>
+
+  <TextView
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="40dp"
+      android:text="注册手机"
+      android:textSize="@dimen/yq_body"
+      style="@style/yq_text_black"
+      />
+
+  <EditText
+      android:id="@+id/edit_register_phone"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:background="@null"
+      android:hint="请输入手机号"
+      android:imeOptions="actionNext"
+      android:inputType="number"
+      android:maxLength="11"
+      android:textColorHint="@color/yq_color_a0a0a0"
+      android:textSize="@dimen/yq_title"
+      />
+
+  <View
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      style="@style/yq_line_style"
+      />
+
+  <TextView
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="20dp"
+      android:text="验证码"
+      android:textSize="@dimen/yq_body"
+      style="@style/yq_text_black"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:orientation="horizontal"
+      >
+
+    <EditText
+        android:id="@+id/edit_register_verify_code"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="请输入验证码"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textColorHint="@color/yq_color_a0a0a0"
+        android:textSize="@dimen/yq_title"
+        />
+
+    <TextView
+        android:id="@+id/tv_register_verify_code"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:paddingLeft="10dp"
+        android:text="获取验证码"
+        android:textColor="@color/main_check_true"
+        android:textSize="@dimen/yq_title"
+        style="@style/yq_text_black"
+        />
+
+  </LinearLayout>
+
+  <TextView
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="30dp"
+      android:text="密码"
+      android:textSize="@dimen/yq_body"
+      style="@style/yq_text_black"
+      />
+
+  <EditText
+      android:id="@+id/edit_register_password"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:background="@null"
+      android:hint="请设置您的密码"
+      android:imeOptions="actionNext"
+      android:inputType="textPassword"
+      android:maxLength="16"
+      android:textColorHint="@color/yq_color_a0a0a0"
+      android:textSize="@dimen/yq_title"
+      />
+
+  <View
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      style="@style/yq_line_style"
+      />
+
+  <com.allen.library.SuperTextView
+      android:id="@+id/super_tv_register_submit"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginTop="30dp"
+      app:sCenterTextColor="@color/white"
+      app:sCenterTextSize="@dimen/yq_title"
+      app:sCenterTextString="注册"
+      app:sDividerLineType="none"
+      app:sShapeCornersRadius="4dp"
+      app:sShapeSelectorNormalColor="@color/main_check_true"
+      app:sShapeSelectorPressedColor="@color/main_check_true"
+      app:sUseShape="true"
+      />
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:layout_gravity="center_horizontal"
+      android:orientation="horizontal"
+      >
+
+    <RelativeLayout
+        android:id="@+id/layout_register_agreement_check"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        >
+      <ImageView
+          android:id="@+id/img_register_agreement_check"
+          android:layout_width="14dp"
+          android:layout_height="14dp"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:background="@drawable/circle_ring_register_check_false"
+          />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:text="我已阅读并接受"
+        android:textSize="12sp"
+        style="@style/yq_text_98"
+        />
+
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:text="《宠乐服务协议条款》"
+        android:textSize="12sp"
+        style="@style/yq_text_black"
+        />
+
+  </LinearLayout>
+
+</LinearLayout>

@@ -82,6 +82,10 @@ public class MainActivity extends BaseActivity {
 
   private String locationText;
 
+  public static Intent callIntent(Context context) {
+    return new Intent(context, MainActivity.class);
+  }
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);

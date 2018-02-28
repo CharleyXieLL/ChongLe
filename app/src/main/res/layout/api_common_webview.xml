@@ -6,7 +6,7 @@
     android:orientation="vertical"
     >
 
-  <include layout="@layout/cl_base_title"/>
+  <include layout="@layout/yq_base_title"/>
 
   <ProgressBar
       android:id="@+id/common_webview_progressbar"

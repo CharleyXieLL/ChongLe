@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@color/main_check_true"
+      >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/yq_headline"
+        style="@style/yq_text_black"
+        />
+  </RelativeLayout>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="30dp"
+      android:layout_marginTop="30dp"
+      android:text="Hi，欢迎登录宠乐"
+      android:textColor="@color/yj_black"
+      android:textSize="22sp"
+      android:textStyle="bold"
+      />
+
+  <TextView
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="40dp"
+      android:text="注册手机"
+      android:textSize="@dimen/yq_body"
+      style="@style/yq_text_black"
+      />
+
+  <EditText
+      android:id="@+id/edit_login_phone"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:background="@null"
+      android:hint="请输入手机号"
+      android:imeOptions="actionNext"
+      android:inputType="number"
+      android:maxLength="11"
+      android:textColorHint="@color/yq_color_a0a0a0"
+      android:textSize="@dimen/yq_title"
+      />
+
+  <View
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      style="@style/yq_line_style"
+      />
+
+  <TextView
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="20dp"
+      android:text="登录密码"
+      android:textSize="@dimen/yq_body"
+      style="@style/yq_text_black"
+      />
+
+  <EditText
+      android:id="@+id/edit_login_password"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:background="@null"
+      android:hint="请输入密码"
+      android:imeOptions="actionNext"
+      android:inputType="textPassword"
+      android:maxLength="16"
+      android:textColorHint="@color/yq_color_a0a0a0"
+      android:textSize="@dimen/yq_title"
+      />
+
+  <View
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      style="@style/yq_line_style"
+      />
+
+  <com.allen.library.SuperTextView
+      android:id="@+id/super_tv_login_submit"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginTop="30dp"
+      app:sCenterTextColor="@color/white"
+      app:sCenterTextSize="@dimen/yq_title"
+      app:sCenterTextString="登录"
+      app:sDividerLineType="none"
+      app:sShapeCornersRadius="5dp"
+      app:sShapeSelectorNormalColor="@color/main_check_true"
+      app:sShapeSelectorPressedColor="@color/main_check_true"
+      app:sUseShape="true"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:orientation="horizontal"
+      >
+
+    <TextView
+        android:id="@+id/tv_login_register"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="注册"
+        style="@style/yq_text_black"
+        />
+
+    <TextView
+        android:id="@+id/tv_login_forget_password"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="忘记密码"
+        style="@style/yq_text_black"
+        />
+  </LinearLayout>
+
+</LinearLayout>

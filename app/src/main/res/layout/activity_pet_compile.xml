@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
 
-  <include layout="@layout/cl_base_title"/>
+  <include layout="@layout/yq_base_title"/>
 
   <com.allen.library.SuperTextView
       android:id="@+id/super_tv_pet_compile_pet_name"

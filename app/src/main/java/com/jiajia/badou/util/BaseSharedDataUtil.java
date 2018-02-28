@@ -6,7 +6,8 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 /**
- * Created by johnwatsondev on 07/03/2017.
+ * Created by Lei on 07/03/2017.
+ *
  */
 public final class BaseSharedDataUtil {
 
@@ -14,6 +15,44 @@ public final class BaseSharedDataUtil {
    * 保存登录用户的一些信息的 sp 文件名称
    */
   private static final String LOGIN_USER_PREF = "loginUserSharedPref";
+
+  /**
+   * 用户登录的凭证
+   */
+  private static final String TOKEN = "token";
+
+  /**
+   * 用户手机号
+   */
+  private static final String MOBILE_PHONE_NO = "mobile_phone_no";
+
+  /**
+   * 保存手机号
+   */
+  public static void setPhoneNo(Context context, String mobelphoneno) {
+    getSharedPrefUtil(context).putString(MOBILE_PHONE_NO, mobelphoneno).apply();
+  }
+
+  /**
+   * 获取手机号
+   */
+  public static String getPhoneNo(Context context) {
+    return getSharedPrefUtil(context).getString(MOBILE_PHONE_NO, "");
+  }
+
+  /**
+   * 保存用户登录令牌
+   */
+  public static void setToken(Context context, String token) {
+    getSharedPrefUtil(context).putString(TOKEN, token).apply();
+  }
+
+  /**
+   * 获取用户登录令牌
+   */
+  public static String getToken(Context context) {
+    return getSharedPrefUtil(context).getString(TOKEN, "");
+  }
 
   private BaseSharedDataUtil() {
 
