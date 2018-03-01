@@ -2,7 +2,7 @@ package com.jiajia.badou.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.jiajia.badou.util.ToastUtil;
+import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -74,5 +74,9 @@ public class TakePhotoActivity extends BaseActivity
       this.invokeParam = invokeParam;
     }
     return type;
+  }
+
+  @Override public void getFailed(String msg, String code) {
+
   }
 }

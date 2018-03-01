@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jiajia.badou.util;
+package com.jiajia.presenter.util;
 
 import java.math.BigInteger;
 import java.util.Locale;

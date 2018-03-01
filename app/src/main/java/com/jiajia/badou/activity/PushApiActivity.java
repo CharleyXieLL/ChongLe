@@ -23,4 +23,8 @@ public class PushApiActivity extends BaseActivity {
       finish();
     }
   }
+
+  @Override public void getFailed(String msg, String code) {
+
+  }
 }

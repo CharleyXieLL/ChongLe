@@ -15,7 +15,7 @@ import com.jiajia.badou.R;
 import com.jiajia.badou.activity.PushApiActivity;
 import com.jiajia.badou.bean.NotificationEntity;
 import com.jiajia.badou.bean.PushBean;
-import com.jiajia.badou.util.Strings;
+import com.jiajia.presenter.util.Strings;
 import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;

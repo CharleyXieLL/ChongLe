@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.Strings;
+import com.jiajia.presenter.util.Strings;
 import com.jiajia.badou.view.wheelview.adapter.NumericWheelAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

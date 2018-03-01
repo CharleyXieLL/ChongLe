@@ -71,14 +71,19 @@ dependencies {
   implementation 'cn.jiguang.sdk:jcore:1.1.9'
 
   implementation 'org.jetbrains:annotations-java5:15.0'
-  implementation 'com.lzy.net:okgo:3.0.4'
 
   implementation "com.github.bumptech.glide:glide:3.7.0"
 
+  implementation 'com.lzy.net:okgo:3.0.4'
+
   implementation 'jp.wasabeef:glide-transformations:2.0.2'
+
+  implementation 'org.projectlombok:lombok:1.16.16'
+  annotationProcessor 'org.projectlombok:lombok:1.16.16'
 
   //*********************** permission ***********************
 
   implementation 'com.lovedise:permissiongen:0.0.6'
   implementation 'org.jetbrains:annotations-java5:15.0'
+  compile project(path: ':presenter')
 }

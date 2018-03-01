@@ -1,4 +1,4 @@
-package com.jiajia.badou.util;
+package com.jiajia.presenter.util;
 
 /**
  * Created by Lei on 2018/2/27.

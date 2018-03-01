@@ -1,1 +1,1 @@
-include ':app', ':LoadingView'
+include ':app', ':LoadingView', ':presenter'

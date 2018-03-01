@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jiajia.badou.util;
+package com.jiajia.presenter.util;
 
 /**
  * This is where all the global exceptions declared of LitePal.

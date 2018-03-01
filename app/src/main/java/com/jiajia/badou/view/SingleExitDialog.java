@@ -11,8 +11,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.Strings;
-import com.jiajia.badou.util.ToastUtil;
+import com.jiajia.presenter.util.Strings;
+import com.jiajia.presenter.util.ToastUtil;
 
 /**
  * Created by Lei on 2018/2/28.

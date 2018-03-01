@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.github.ybq.android.spinkit.style.Circle;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.Strings;
+import com.jiajia.presenter.util.Strings;
 
 public class LoadingProgress {
 

@@ -25,8 +25,8 @@ import com.jiajia.badou.fragment.MainPageFragment;
 import com.jiajia.badou.fragment.MineFragment;
 import com.jiajia.badou.fragment.StoreFragment;
 import com.jiajia.badou.util.GPSUtil;
-import com.jiajia.badou.util.Strings;
-import com.jiajia.badou.util.ToastUtil;
+import com.jiajia.presenter.util.Strings;
+import com.jiajia.presenter.util.ToastUtil;
 import com.jiajia.badou.util.baidu.QtLocationClient;
 
 public class MainActivity extends BaseActivity {
@@ -296,4 +296,8 @@ public class MainActivity extends BaseActivity {
       }
     }
   };
+
+  @Override public void getFailed(String msg, String code) {
+
+  }
 }

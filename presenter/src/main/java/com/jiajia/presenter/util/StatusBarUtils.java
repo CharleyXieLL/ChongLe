@@ -1,4 +1,4 @@
-package com.jiajia.badou.util;
+package com.jiajia.presenter.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

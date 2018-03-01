@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
+import com.jiajia.presenter.util.SharedPrefUtil;
 
 /**
  * Created by Lei on 07/03/2017.
- *
  */
 public final class BaseSharedDataUtil {
 
@@ -25,6 +25,11 @@ public final class BaseSharedDataUtil {
    * 用户手机号
    */
   private static final String MOBILE_PHONE_NO = "mobile_phone_no";
+
+  /**
+   * 用户 id
+   */
+  private static final String USER_ID = "user_id";
 
   /**
    * 保存手机号
@@ -52,6 +57,14 @@ public final class BaseSharedDataUtil {
    */
   public static String getToken(Context context) {
     return getSharedPrefUtil(context).getString(TOKEN, "");
+  }
+
+  public static void setUserId(Context context, long userId) {
+    getSharedPrefUtil(context).putLong(USER_ID, userId).apply();
+  }
+
+  public static long getUserId(Context context) {
+    return getSharedPrefUtil(context).getLong(USER_ID, 0);
   }
 
   private BaseSharedDataUtil() {

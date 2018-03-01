@@ -5,7 +5,6 @@ import android.os.Handler;
 import butterknife.ButterKnife;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.BaseSharedDataUtil;
-import com.jiajia.badou.util.Strings;
 
 /**
  * Created by Lei on 2018/2/28.
@@ -21,7 +20,8 @@ public class SplashActivity extends BaseActivity {
     ButterKnife.bind(this);
     handler.postDelayed(new Runnable() {
       @Override public void run() {
-        if (Strings.isNullOrEmpty(BaseSharedDataUtil.getToken(SplashActivity.this))) {
+        long id = BaseSharedDataUtil.getUserId(getApplicationContext());
+        if (id == 0) {
           startActivity(LoginActivity.callIntent(SplashActivity.this));
         } else {
           startActivity(MainActivity.callIntent(SplashActivity.this));
@@ -33,5 +33,9 @@ public class SplashActivity extends BaseActivity {
   @Override protected void onDestroy() {
     super.onDestroy();
     handler.removeCallbacksAndMessages(null);
+  }
+
+  @Override public void getFailed(String msg, String code) {
+
   }
 }

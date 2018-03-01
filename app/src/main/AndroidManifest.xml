@@ -115,6 +115,9 @@
     <activity
         android:name=".activity.RegisterActivity"
         android:screenOrientation="portrait"/>
+    <activity
+        android:name=".activity.ResetLoginPasswordActivity"
+        android:screenOrientation="portrait"/>
 
     <meta-data
         android:name="com.baidu.lbsapi.API_KEY"

@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.ToastUtil;
+import com.jiajia.presenter.util.ToastUtil;
 
 /**
  * Created by Lei on 2017/6/13.

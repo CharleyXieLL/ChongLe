@@ -33,9 +33,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.ProgressWebChromeClient;
-import com.jiajia.badou.util.StatusBarUtils;
-import com.jiajia.badou.util.Strings;
+import com.jiajia.presenter.util.ProgressWebChromeClient;
+import com.jiajia.presenter.util.StatusBarUtils;
+import com.jiajia.presenter.util.Strings;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -388,5 +388,9 @@ public class CommonWebViewActivity extends BaseActivity {
       webView.removeAllViews();
       webView.destroy();
     }
+  }
+
+  @Override public void getFailed(String msg, String code) {
+
   }
 }
