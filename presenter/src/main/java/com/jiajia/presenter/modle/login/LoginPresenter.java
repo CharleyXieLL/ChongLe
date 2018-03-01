@@ -4,6 +4,7 @@ import com.jiajia.presenter.bean.login.LoginSuccessBean;
 import com.jiajia.presenter.modle.BasePresenter;
 import com.jiajia.presenter.net.HttpUtil;
 import com.jiajia.presenter.net.OkGoHttpAction;
+import com.jiajia.presenter.net.OkGoHttpActionNoBean;
 import com.jiajia.presenter.net.gson.Result;
 
 /**
@@ -27,5 +28,17 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
         getView().getFailed(msg, code);
       }
     }.okGoGet(getActivity(), HttpUtil.userLogin(userName, password), LoginSuccessBean.class);
+  }
+
+  public void checkAccountCanRegister(String userName) {
+    new OkGoHttpActionNoBean() {
+      @Override public void onResponseCodeSuccess(String msg, String code) throws Exception {
+        getView().checkAccountSuccess();
+      }
+
+      @Override public void onResponseCodeFailed(String msg, String code) throws Exception {
+        getView().checkAccountFailed();
+      }
+    }.okGoGet(getActivity(), HttpUtil.checkCanRegister(userName));
   }
 }

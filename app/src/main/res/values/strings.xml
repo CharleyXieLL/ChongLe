@@ -13,6 +13,8 @@
 
   <string name="yq_identity_username">真实姓名</string>
 
+  <string name="yq_network_error">~网络未连接，请连接网络重试~</string>
+
   <string-array name="pet_gender">
     <item>公</item>
     <item>母</item>

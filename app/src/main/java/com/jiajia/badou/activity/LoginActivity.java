@@ -21,6 +21,8 @@ import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.BaseSharedDataUtil;
 import com.jiajia.badou.util.EditTextUtil;
+import com.jiajia.badou.util.InterfaceUtil;
+import com.jiajia.badou.view.ExitView;
 import com.jiajia.presenter.bean.login.LoginSuccessBean;
 import com.jiajia.presenter.modle.login.LoginMvpView;
 import com.jiajia.presenter.modle.login.LoginPresenter;
@@ -60,7 +62,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     setPresenter(new LoginPresenter());
     setStatusBar();
     initEditText();
-    getPresenter().login("123456", "1234567");
   }
 
   private void initEditText() {
@@ -118,7 +119,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.super_tv_login_submit:
-
+        if (login()) {
+          getPresenter().checkAccountCanRegister(phoneNumber);
+        }
         break;
       case R.id.tv_login_register:
         startActivity(RegisterActivity.callIntent(LoginActivity.this));
@@ -171,5 +174,26 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     BaseSharedDataUtil.setUserId(getApplicationContext(), loginSuccessBean.getId());
     startActivity(MainActivity.callIntent(activity));
     finish();
+  }
+
+  @Override public void checkAccountSuccess() {
+    dismissLoadingDialog();
+    ExitView exitView = new ExitView(activity);
+    exitView.setMsg("当前账号未注册\n是否前去注册？");
+    exitView.setExitViewCallBack(new InterfaceUtil.ExitViewCallBack() {
+      @Override public void exitViewLoginOut() {
+        dismissLoadingDialog();
+        startActivity(RegisterActivity.callIntent(activity));
+      }
+
+      @Override public void exitNegative() {
+      }
+    });
+    exitView.showDialog();
+  }
+
+  @Override public void checkAccountFailed() {
+    dismissLoadingDialog();
+    getPresenter().login(phoneNumber, password);
   }
 }

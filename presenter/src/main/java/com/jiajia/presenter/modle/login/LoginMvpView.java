@@ -8,4 +8,6 @@ import com.jiajia.presenter.impl.MvpView;
  */
 public interface LoginMvpView extends MvpView {
   void loginSuccess(LoginSuccessBean loginSuccessBean);
+  void checkAccountSuccess();
+  void checkAccountFailed();
 }
