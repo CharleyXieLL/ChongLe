@@ -1,10 +1,13 @@
 package com.jiajia.badou.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.view.View;
@@ -36,6 +39,10 @@ import com.jiajia.presenter.util.ToastUtil;
  */
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginMvpView {
 
+  public static final String TAG = "LoginActivity";
+
+  public static final String PHONE_NUMBER = "phone_number";
+
   @BindView(R.id.edit_login_phone) EditText editPhone;
   @BindView(R.id.edit_login_password) EditText editPassword;
   @BindView(R.id.super_tv_login_submit) SuperTextView superTvSubmit;
@@ -55,6 +62,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     return new Intent(context, LoginActivity.class);
   }
 
+  public static Intent callIntent(Context context, String phoneNumber) {
+    Intent intent = new Intent(context, LoginActivity.class);
+    intent.putExtra(PHONE_NUMBER, phoneNumber);
+    return intent;
+  }
+
+  public static Intent getBroadcastIntent(String phoneNumber) {
+    Intent intent = new Intent(TAG);
+    intent.putExtra(PHONE_NUMBER, phoneNumber);
+    return intent;
+  }
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
@@ -62,6 +81,21 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     setPresenter(new LoginPresenter());
     setStatusBar();
     initEditText();
+    initIntentData();
+    initBroadcastReceiver();
+  }
+
+  private void initBroadcastReceiver() {
+    LocalBroadcastManager.getInstance(this)
+        .registerReceiver(broadcastReceiver, new IntentFilter(TAG));
+  }
+
+  private void initIntentData() {
+    phoneNumber = getIntent().getStringExtra(PHONE_NUMBER);
+    if (!Strings.isNullOrEmpty(phoneNumber)) {
+      editPhone.setText(phoneNumber);
+      editPhone.setSelection(phoneNumber.length());
+    }
   }
 
   private void initEditText() {
@@ -165,6 +199,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
   }
 
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    LocalBroadcastManager.getInstance(activity).unregisterReceiver(broadcastReceiver);
+  }
+
   @Override public void getFailed(String msg, String code) {
     dismissLoadingDialog();
     ToastUtil.showToast(getApplicationContext(), msg, false);
@@ -183,7 +222,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     exitView.setExitViewCallBack(new InterfaceUtil.ExitViewCallBack() {
       @Override public void exitViewLoginOut() {
         dismissLoadingDialog();
-        startActivity(RegisterActivity.callIntent(activity));
+        startActivity(RegisterActivity.callIntent(activity, phoneNumber));
       }
 
       @Override public void exitNegative() {
@@ -196,4 +235,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     dismissLoadingDialog();
     getPresenter().login(phoneNumber, password);
   }
+
+  BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    @Override public void onReceive(Context context, Intent intent) {
+      String phoneNumber = intent.getStringExtra(PHONE_NUMBER);
+      if (!Strings.isNullOrEmpty(phoneNumber)) {
+        editPhone.setText(phoneNumber);
+        editPhone.setSelection(phoneNumber.length());
+      }
+    }
+  };
 }

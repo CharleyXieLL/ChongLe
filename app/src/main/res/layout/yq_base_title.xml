@@ -56,5 +56,6 @@
       android:gravity="center_vertical"
       android:textSize="14sp"
       tools:text="添加宠物"
+      android:textColor="@color/main_check_true"
       />
 </RelativeLayout>

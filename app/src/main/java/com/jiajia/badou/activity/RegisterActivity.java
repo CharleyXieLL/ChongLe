@@ -24,6 +24,9 @@ import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.EditTextUtil;
 import com.jiajia.badou.util.GetVerifyCodeTimerUtil;
+import com.jiajia.badou.view.MessageView;
+import com.jiajia.presenter.modle.login.RegisterMvpView;
+import com.jiajia.presenter.modle.login.RegisterPresenter;
 import com.jiajia.presenter.util.StatusBarUtils;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
@@ -32,7 +35,9 @@ import com.jiajia.presenter.util.ToastUtil;
  * Created by Lei on 2018/2/28.
  * 注册界面
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterMvpView {
+
+  private static final String PHONE_NUMBER = "phone_number";
 
   @BindView(R.id.layout_register_back) RelativeLayout layoutBack;
   @BindView(R.id.edit_register_phone) EditText editPhone;
@@ -65,6 +70,12 @@ public class RegisterActivity extends BaseActivity {
     return new Intent(context, RegisterActivity.class);
   }
 
+  public static Intent callIntent(Context context, String phoneNumber) {
+    Intent intent = new Intent(context, RegisterActivity.class);
+    intent.putExtra(PHONE_NUMBER, phoneNumber);
+    return intent;
+  }
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_register);
@@ -72,6 +83,15 @@ public class RegisterActivity extends BaseActivity {
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();
+    initIntentData();
+  }
+
+  private void initIntentData() {
+    phoneNumber = getIntent().getStringExtra(PHONE_NUMBER);
+    if (!Strings.isNullOrEmpty(phoneNumber)) {
+      editPhone.setText(phoneNumber);
+      editPhone.setSelection(phoneNumber.length());
+    }
   }
 
   private void initEditText() {
@@ -83,7 +103,8 @@ public class RegisterActivity extends BaseActivity {
             || i == EditorInfo.IME_ACTION_DONE
             || i == EditorInfo.IME_ACTION_GO) {
           if (registerSubmit()) {
-
+            showLoadingDialog("");
+            getPresenter().register(phoneNumber, password);
           }
         }
         return true;
@@ -174,7 +195,8 @@ public class RegisterActivity extends BaseActivity {
     switch (view.getId()) {
       case R.id.super_tv_register_submit:
         if (registerSubmit()) {
-
+          showLoadingDialog("");
+          getPresenter().register(phoneNumber, password);
         }
         break;
       case R.id.layout_register_agreement_check:
@@ -225,5 +247,21 @@ public class RegisterActivity extends BaseActivity {
 
   @Override public void getFailed(String msg, String code) {
 
+  }
+
+  @Override public void checkAccountSuccess() {
+    dismissLoadingDialog();
+  }
+
+  @Override public void checkAccountFailed() {
+    dismissLoadingDialog();
+    MessageView messageView = new MessageView(activity, "当前账号已注册");
+    messageView.createDialog();
+  }
+
+  @Override public void register() {
+    dismissLoadingDialog();
+    startActivity(LoginActivity.callIntent(activity, phoneNumber));
+    finish();
   }
 }

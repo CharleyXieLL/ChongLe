@@ -15,6 +15,7 @@ import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.badou.adapter.ReportLendPeopleAdapter;
+import com.jiajia.badou.util.ActManager;
 import com.jiajia.presenter.util.ChongLeConfig;
 import com.jiajia.presenter.util.ToastUtil;
 import com.jiajia.badou.view.BigAvatarView;
@@ -69,6 +70,7 @@ public class PetCompileActivity extends TakePhotoActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_pet_compile);
     ButterKnife.bind(this);
+    ActManager.getAppManager().add(this);
     initView();
     initCalendarView();
     initReportDialog();
@@ -234,6 +236,7 @@ public class PetCompileActivity extends TakePhotoActivity {
 
   @Override protected void onDestroy() {
     super.onDestroy();
+    ActManager.getAppManager().remove(this);
     if (upLoadAvatarView != null) {
       upLoadAvatarView.setUpLoadAvatarViewCallBack(null);
     }

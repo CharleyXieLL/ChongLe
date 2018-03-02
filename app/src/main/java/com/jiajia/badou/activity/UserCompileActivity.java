@@ -3,23 +3,29 @@ package com.jiajia.badou.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
-import com.jiajia.presenter.util.ChongLeConfig;
-import com.jiajia.presenter.util.ToastUtil;
+import com.jiajia.badou.util.ActManager;
+import com.jiajia.badou.util.BaseSharedDataUtil;
+import com.jiajia.badou.util.InterfaceUtil;
 import com.jiajia.badou.view.BigAvatarView;
 import com.jiajia.badou.view.CommonPopWindow;
+import com.jiajia.badou.view.ExitView;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
+import com.jiajia.presenter.util.ChongLeConfig;
+import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.model.TResult;
 import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.Arrays;
@@ -38,7 +44,8 @@ public class UserCompileActivity extends TakePhotoActivity {
   @BindView(R.id.relat_user_compile_avatar) RelativeLayout relatAvatar;
   @BindView(R.id.super_tv_user_compile_user_gender) SuperTextView superTvUserGender;
   @BindView(R.id.edit_user_compile_sign) EditText editSign;
-  @BindView(R.id.super_tv_user_compile_save) SuperTextView superTvSave;
+  @BindView(R.id.super_tv_user_compile_login_put) SuperTextView superTvLoginOut;
+  @BindView(R.id.tv_base_title_right) TextView tvBaseTitleRight;
 
   private UpLoadAvatarView upLoadAvatarView;
   private CommonPopWindow commonPopWindow;
@@ -46,6 +53,8 @@ public class UserCompileActivity extends TakePhotoActivity {
   private BigAvatarView bigAvatarView;
 
   private String gender;
+
+  private Handler logOutHandler = new Handler();
 
   public static Intent callIntent(Context context) {
     return new Intent(context, UserCompileActivity.class);
@@ -55,11 +64,15 @@ public class UserCompileActivity extends TakePhotoActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_user_compile);
     ButterKnife.bind(this);
-
+    initBaseUi();
     initUpLoadAvatarView();
     initCommonPopWindow();
     initSingleExitDialog();
     initBigAvatarView();
+  }
+
+  private void initBaseUi() {
+    tvBaseTitleRight.setText("保存");
   }
 
   private void initUpLoadAvatarView() {
@@ -106,7 +119,8 @@ public class UserCompileActivity extends TakePhotoActivity {
   @OnClick({
       R.id.yq_base_back_arrow_iv, R.id.super_tv_user_compile_user_name,
       R.id.img_user_compile_avatar, R.id.relat_user_compile_avatar,
-      R.id.super_tv_user_compile_user_gender, R.id.super_tv_user_compile_save
+      R.id.super_tv_user_compile_user_gender, R.id.super_tv_user_compile_login_put,
+      R.id.tv_base_title_right
   }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.yq_base_back_arrow_iv:
@@ -124,8 +138,31 @@ public class UserCompileActivity extends TakePhotoActivity {
       case R.id.super_tv_user_compile_user_gender:
         commonPopWindow.showDialog();
         break;
-      case R.id.super_tv_user_compile_save:
+      case R.id.tv_base_title_right:
 
+        break;
+      case R.id.super_tv_user_compile_login_put:
+        ExitView exitView = new ExitView(activity);
+        exitView.setMsg("确认退出登录吗？");
+        exitView.setExitViewCallBack(new InterfaceUtil.ExitViewCallBack() {
+          @Override public void exitViewLoginOut() {
+            showLoadingDialog("");
+            logOutHandler.postDelayed(new Runnable() {
+              @Override public void run() {
+                dismissLoadingDialog();
+                BaseSharedDataUtil.setUserId(activity, 0);
+                ActManager.getAppManager().finishAllActivity();
+                startActivity(LoginActivity.callIntent(activity));
+                finish();
+              }
+            }, 500);
+          }
+
+          @Override public void exitNegative() {
+
+          }
+        });
+        exitView.showDialog();
         break;
     }
   }

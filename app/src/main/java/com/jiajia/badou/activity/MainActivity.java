@@ -24,6 +24,7 @@ import com.jiajia.badou.fragment.LookFragment;
 import com.jiajia.badou.fragment.MainPageFragment;
 import com.jiajia.badou.fragment.MineFragment;
 import com.jiajia.badou.fragment.StoreFragment;
+import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.util.GPSUtil;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
@@ -90,6 +91,7 @@ public class MainActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+    ActManager.getAppManager().add(this);
     initView();
   }
 
@@ -170,6 +172,7 @@ public class MainActivity extends BaseActivity {
 
   @Override protected void onDestroy() {
     super.onDestroy();
+    ActManager.getAppManager().remove(this);
     if (gpsUtil != null) {
       gpsUtil.onDestroy();
     }
@@ -298,6 +301,6 @@ public class MainActivity extends BaseActivity {
   };
 
   @Override public void getFailed(String msg, String code) {
-
+    dismissLoadingDialog();
   }
 }

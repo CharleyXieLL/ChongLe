@@ -126,20 +126,19 @@
       />
 
   <com.allen.library.SuperTextView
-      android:id="@+id/super_tv_user_compile_save"
+      android:id="@+id/super_tv_user_compile_login_put"
       android:layout_width="match_parent"
       android:layout_height="44dp"
       android:layout_marginLeft="40dp"
       android:layout_marginRight="40dp"
-      android:layout_marginTop="50dp"
+      android:layout_marginTop="30dp"
       app:sCenterTextColor="@color/white"
       app:sCenterTextSize="16sp"
-      app:sCenterTextString="保存"
+      app:sCenterTextString="退出登录"
       app:sDividerLineType="none"
       app:sShapeCornersRadius="4dp"
-      app:sShapeSelectorNormalColor="@color/main_check_true"
-      app:sShapeSelectorPressedColor="@color/main_check_true_2"
+      app:sShapeSelectorNormalColor="@color/yj_warning_red"
+      app:sShapeSelectorPressedColor="@color/yj_warning_red"
       app:sUseShape="true"
       />
-
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.view.KeyEvent;
@@ -24,6 +25,8 @@ import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.EditTextUtil;
 import com.jiajia.badou.util.GetVerifyCodeTimerUtil;
+import com.jiajia.presenter.modle.login.ForgetPasswordMvpView;
+import com.jiajia.presenter.modle.login.ForgetPasswordPresenter;
 import com.jiajia.presenter.util.StatusBarUtils;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
@@ -32,7 +35,10 @@ import com.jiajia.presenter.util.ToastUtil;
  * Created by Lei on 2018/3/1.
  * 重置登录密码
  */
-public class ResetLoginPasswordActivity extends BaseActivity {
+public class ResetLoginPasswordActivity extends BaseActivity<ForgetPasswordPresenter>
+    implements ForgetPasswordMvpView {
+
+  public static final String PHONE_NUMBER = "phone_number";
 
   @BindView(R.id.layout_reset_pwd_back) RelativeLayout layoutPwdBack;
   @BindView(R.id.edit_reset_pwd_phone) EditText editPwdPhone;
@@ -60,6 +66,12 @@ public class ResetLoginPasswordActivity extends BaseActivity {
     return new Intent(context, ResetLoginPasswordActivity.class);
   }
 
+  public static Intent callIntent(Context context, String phoneNumber) {
+    Intent intent = new Intent(context, ResetLoginPasswordActivity.class);
+    intent.putExtra(PHONE_NUMBER, phoneNumber);
+    return intent;
+  }
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_forget_password);
@@ -67,6 +79,15 @@ public class ResetLoginPasswordActivity extends BaseActivity {
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();
+    initIntentData();
+  }
+
+  private void initIntentData() {
+    phoneNumber = getIntent().getStringExtra(PHONE_NUMBER);
+    if (!Strings.isNullOrEmpty(phoneNumber)) {
+      editPwdPhone.setText(phoneNumber);
+      editPwdPhone.setSelection(phoneNumber.length());
+    }
   }
 
   private void initEditText() {
@@ -78,7 +99,8 @@ public class ResetLoginPasswordActivity extends BaseActivity {
             || i == EditorInfo.IME_ACTION_DONE
             || i == EditorInfo.IME_ACTION_GO) {
           if (registerSubmit()) {
-
+            showLoadingDialog("");
+            getPresenter().updatePassword(phoneNumber);
           }
         }
         return true;
@@ -199,12 +221,33 @@ public class ResetLoginPasswordActivity extends BaseActivity {
         }
         break;
       case R.id.super_tv_reset_pwd_submit:
-
+        if (registerSubmit()) {
+          showLoadingDialog("");
+          getPresenter().checkAccountCanRegister(phoneNumber);
+        }
         break;
     }
   }
 
   @Override public void getFailed(String msg, String code) {
+    dismissLoadingDialog();
+    ToastUtil.showToast(getApplicationContext(), msg, false);
+  }
 
+  @Override public void updatePassword() {
+    dismissLoadingDialog();
+    ToastUtil.showToast(getApplicationContext(), "密码设置成功", false);
+    LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+    localBroadcastManager.sendBroadcast(LoginActivity.getBroadcastIntent(phoneNumber));
+    finish();
+  }
+
+  @Override public void checkAccountCanRegister() {
+    dismissLoadingDialog();
+    ToastUtil.showToast(getApplicationContext(), "当前账号未被注册！", false);
+  }
+
+  @Override public void checkAccountCanRegisterFailed() {
+    getPresenter().updatePassword(phoneNumber);
   }
 }

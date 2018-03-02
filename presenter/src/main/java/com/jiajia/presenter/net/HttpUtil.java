@@ -35,4 +35,11 @@ public class HttpUtil {
   public static String selectAllService() {
     return BASE_URL + "selectAllService";
   }
+
+  /**
+   * 修改密码
+   */
+  public static String updatePassword(String userName) {
+    return BASE_URL + "upUserPassById?" + "username=" + userName;
+  }
 }
