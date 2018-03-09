@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import com.jiajia.badou.R;
+import com.jiajia.badou.view.LoadingProgress;
 import com.jiajia.presenter.impl.MvpView;
 import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.StatusBarUtils;
-import com.jiajia.badou.view.LoadingProgress;
+import com.jiajia.presenter.util.ToastUtil;
 
 /**
  * Created by Lei on 2018/1/26.
@@ -117,5 +118,9 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
   @Override protected void onDestroy() {
     super.onDestroy();
     presenter = null;
+  }
+
+  public void showToast(String text) {
+    ToastUtil.showToast(getApplicationContext(), text, false);
   }
 }

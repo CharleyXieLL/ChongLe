@@ -198,6 +198,22 @@ public class MainActivity extends BaseActivity {
     }
   }
 
+  private void hideAllFragment() {
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    if (mainPageFragment != null) {
+      transaction.hide(mainPageFragment).commitAllowingStateLoss();
+    }
+    if (storeFragment != null) {
+      transaction.hide(storeFragment).commitAllowingStateLoss();
+    }
+    if (lookFragment != null) {
+      transaction.hide(lookFragment).commitAllowingStateLoss();
+    }
+    if (mineFragment != null) {
+      transaction.hide(mineFragment).commitAllowingStateLoss();
+    }
+  }
+
   @OnClick({
       R.id.layout_main_check_main_page, R.id.layout_main_check_store, R.id.layout_main_check_look,
       R.id.layout_main_check_mine

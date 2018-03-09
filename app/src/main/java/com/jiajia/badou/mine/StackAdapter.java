@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,11 +21,6 @@ public class StackAdapter extends RecyclerView.Adapter<StackAdapter.ViewHolder> 
   private LayoutInflater inflater;
   private List<String> datas;
   private Context context;
-  private List<Integer> imageUrls =
-      Arrays.asList(R.mipmap.xm2, R.mipmap.xm3, R.mipmap.xm4, R.mipmap.xm5, R.mipmap.xm6,
-          R.mipmap.xm7, R.mipmap.xm1, R.mipmap.xm8, R.mipmap.xm9, R.mipmap.xm1, R.mipmap.xm2,
-          R.mipmap.xm3, R.mipmap.xm4, R.mipmap.xm5, R.mipmap.xm6);
-
   public StackAdapter(List<String> datas) {
     this.datas = datas;
   }
@@ -40,7 +34,7 @@ public class StackAdapter extends RecyclerView.Adapter<StackAdapter.ViewHolder> 
   }
 
   @Override public void onBindViewHolder(ViewHolder holder, int position) {
-    Glide.with(context).load(imageUrls.get(position)).into(holder.cover);
+    Glide.with(context).load(datas.get(position)).into(holder.cover);
     holder.index.setText(String.valueOf(position + 1));
   }
 

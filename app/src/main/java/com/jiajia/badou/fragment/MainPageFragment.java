@@ -1,25 +1,23 @@
 package com.jiajia.badou.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.CommonWebViewActivity;
 import com.jiajia.badou.adapter.MainPageFragmentAdapter;
+import com.jiajia.badou.view.GlideImageLoader;
+import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
+import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
+import com.jiajia.presenter.modle.main.MainPageFragmentPresenter;
 import com.jiajia.presenter.util.InputMethodUtil;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
-import com.jiajia.badou.view.GlideImageLoader;
-import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -32,7 +30,7 @@ import java.util.List;
  * Created by Lei on 2018/1/30.
  * 首页
  */
-public class MainPageFragment extends BaseFragment {
+public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
 
   @BindView(R.id.fragment_main_page_recycler_view) HeaderAndFooterRecyclerView recyclerView;
   @BindView(R.id.edit_main_page_search) EditText editText;
@@ -41,7 +39,7 @@ public class MainPageFragment extends BaseFragment {
   private Banner banner;
   private MainPageFragmentAdapter adapter;
 
-  private List<String> texts;
+  private List<MainPageFragmentListBean> mainPageFragmentListBeans = new ArrayList<>();
   private InputMethodUtil inputMethodUtil;
 
   private Handler handler = new Handler();
@@ -52,16 +50,11 @@ public class MainPageFragment extends BaseFragment {
     return new MainPageFragment();
   }
 
-  @Nullable @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main_page, container, false);
-    ButterKnife.bind(this, view);
-    return view;
+  @Override protected int onCreateViewId() {
+    return R.layout.fragment_main_page;
   }
 
-  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+  @Override protected void init() {
     initView();
     initInputMethod();
     initEdit();
@@ -89,33 +82,47 @@ public class MainPageFragment extends BaseFragment {
 
     initBanner();
 
-    adapter = new MainPageFragmentAdapter(getActivity(), new ArrayList<String>());
+    adapter = new MainPageFragmentAdapter(getActivity(), new ArrayList<MainPageFragmentListBean>());
 
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(adapter);
     recyclerView.addHeaderView(headerView);
 
-    texts = new ArrayList<>();
-    texts.add("第一行");
-    texts.add("第二行");
-    texts.add("第三行");
-    texts.add("第四行");
-    texts.add("第五行");
-    texts.add("第六行");
-    texts.add("第七行");
-    texts.add("第八行");
-    texts.add("第九行");
-    texts.add("第十行");
-    texts.add("第十一行");
-    texts.add("第十二行");
+    initListBean();
+  }
 
-    adapter.addAll(texts);
-
+  private void initListBean() {
+    mainPageFragmentListBeans.clear();
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "http://www.ygaiquan.com/UploadFiles/2017/2/2017022010251082838.jpg", "张姐姐教你三大技巧让宠物按时吃饭。",
+        "张姐姐", "253"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "http://n.sinaimg.cn/tech/transform/20170127/SZqG-fxzyxnu9471294.jpg", "如何教一只恶霸犬能顺从的吃药。",
+        "巴豆粑粑", "163"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://pic.sc.chinaz.com/files/pic/pic9/201401/apic3177.jpg",
+            "如何给心爱的宝宝制作精美的住所。", "小楠", "89"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://s1.1zoom.me/big3/945/367740-svetik.jpg",
+            "给宝宝吃这些的时候千万要注意以下几点。", "爱上茶", "353"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://vistanews.ru/uploads/posts/2016-01/1451920325_8.jpg",
+            "换季宝宝容易生病不用怕，我来支招。", "取个名字", "532"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "https://1gr.cz/fotky/idnes/09/104/cl5/MCE2ecb31_shutterstock_23472034.jpg",
+        "嫌宝宝太笨？不，是你没用对方法。", "三三两两", "35"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "https://avatars.mds.yandex.net/get-pdb/34158/426e4077-628f-4ac0-b0ed-1c3134180c3c/s800",
+        "葛大爷手把手教授让宝宝学会自己上厕所。", "葛大爷", "278"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://img1.iyiou.com/Cover/2015-04-07/552338cb710a0.jpg",
+            "出门遛狗你必须要知道的几点。", "李爱琴", "137"));
+    adapter.addAll(mainPageFragmentListBeans);
     adapter.setMainPageFragmentAdapterCallBack(
         new MainPageFragmentAdapter.MainPageFragmentAdapterCallBack() {
           @Override public void onClick(int position) {
-            ToastUtil.showToast(getActivity(), texts.get(position), false);
+
           }
         });
 
@@ -136,10 +143,12 @@ public class MainPageFragment extends BaseFragment {
       }
     });
 
-    List<Integer> imageUrls =
-        Arrays.asList(R.mipmap.xm2, R.mipmap.xm3, R.mipmap.xm4, R.mipmap.xm5, R.mipmap.xm6,
-            R.mipmap.xm7, R.mipmap.xm1, R.mipmap.xm8, R.mipmap.xm9, R.mipmap.xm1, R.mipmap.xm2,
-            R.mipmap.xm3, R.mipmap.xm4, R.mipmap.xm5, R.mipmap.xm6);
+    List<String> imageUrls =
+        Arrays.asList("https://s1.1zoom.ru/big0/453/Dogs_Spitz_Winter_hat_471485.jpg",
+            "https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=78bde825a586c9171c0e5a6ba8541baa/63d9f2d3572c11df449bb3fe612762d0f603c2a1.jpg",
+            "http://img02.tooopen.com/Downs/images/2010/9/9/sy_20100909075330671012.jpg",
+            "http://first-vet.bg/wp-content/uploads/2014/09/dogcat23.jpg",
+            "http://www.rainbowbridge-pet.com/index/pics/20170223/201702231487847321740.png");
 
     banner.setImages(imageUrls);
     banner.start();
@@ -175,5 +184,10 @@ public class MainPageFragment extends BaseFragment {
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override public void getFailed(String msg, String code) {
+    dismissLoadingDialog();
+    ToastUtil.showToast(activity.getApplicationContext(), msg, false);
   }
 }

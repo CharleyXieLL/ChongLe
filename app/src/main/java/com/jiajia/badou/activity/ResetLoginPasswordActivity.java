@@ -76,6 +76,7 @@ public class ResetLoginPasswordActivity extends BaseActivity<ForgetPasswordPrese
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_forget_password);
     ButterKnife.bind(this);
+    setPresenter(new ForgetPasswordPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();

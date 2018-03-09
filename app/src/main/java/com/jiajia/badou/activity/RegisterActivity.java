@@ -80,6 +80,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_register);
     ButterKnife.bind(this);
+    setPresenter(new RegisterPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();
@@ -261,7 +262,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
   @Override public void register() {
     dismissLoadingDialog();
-    startActivity(LoginActivity.callIntent(activity, phoneNumber));
+    showToast("注册成功");
     finish();
   }
 }

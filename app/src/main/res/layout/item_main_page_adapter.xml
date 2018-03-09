@@ -1,28 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@color/yq_c_bg"
+    android:layout_height="110dp"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="2.5dp"
-    android:paddingTop="2.5dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     >
 
   <LinearLayout
       android:id="@+id/layout_item_main_page_content"
       android:layout_width="match_parent"
-      android:layout_height="80dp"
+      android:layout_height="match_parent"
       android:background="@drawable/yj_pressed"
       android:orientation="horizontal"
       android:paddingLeft="20dp"
       android:paddingRight="20dp"
       >
 
-    <TextView
-        android:id="@+id/tv_item_main_page"
-        android:layout_gravity="center_vertical"
-        style="@style/yq_text_black"
+    <ImageView
+        android:id="@+id/img_main_page_fragment_list_avatar"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        tools:background="@mipmap/xm1"
+        android:scaleType="fitXY"
         />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        >
+
+      <TextView
+          android:id="@+id/tv_main_page_fragment_tip"
+          android:gravity="left"
+          android:textSize="@dimen/yq_body"
+          tools:text="张姐姐教你三大技巧让宠物按时吃饭"
+          android:lines="2"
+          android:ellipsize="end"
+          style="@style/yq_text_black"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:orientation="horizontal"
+          >
+        <TextView
+            android:id="@+id/tv_main_page_fragment_name"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/yq_body"
+            tools:text="张姐姐"
+            style="@style/yq_text_98"
+            />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_gravity="center_vertical"
+              android:orientation="horizontal"
+              >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/cl_see"
+                />
+            <TextView
+                android:id="@+id/tv_main_page_fragment_look_account"
+                android:layout_marginLeft="5dp"
+                android:textSize="13sp"
+                tools:text="234"
+                style="@style/yq_text_98"
+                />
+          </LinearLayout>
+        </RelativeLayout>
+
+      </LinearLayout>
+    </RelativeLayout>
   </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_item_store_hot_recommend_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    >
+
+  <ImageView
+      android:id="@+id/img_item_store_hot_recommend"
+      android:layout_width="match_parent"
+      android:layout_height="140dp"
+      tools:background="@mipmap/ic_launcher"
+      />
+
+  <TextView
+      android:id="@+id/tv_item_store_hot_recommend_tip"
+      android:layout_marginTop="10dp"
+      android:ellipsize="end"
+      android:gravity="left"
+      android:lines="2"
+      android:textSize="@dimen/yq_body"
+      tools:text="可拆卸真皮进口狗狗项圈"
+      style="@style/yq_text_black"
+      />
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
+      android:orientation="horizontal"
+      >
+    <TextView
+        android:id="@+id/tv_item_store_hot_recommend_account"
+        android:textColor="@color/yj_black"
+        android:textStyle="bold"
+        tools:text="¥1998"
+        style="@style/yq_text_black"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_store_hot_recommend_account_old"
+        android:textColor="@color/yq_color_a0a0a0"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        tools:text="¥1998"
+        style="@style/yq_text_black"
+        />
+  </LinearLayout>
+
+</LinearLayout>

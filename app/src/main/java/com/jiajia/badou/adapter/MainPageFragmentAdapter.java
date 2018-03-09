@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
+import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
 import java.util.List;
 
 /**
@@ -19,21 +22,21 @@ import java.util.List;
 public class MainPageFragmentAdapter
     extends RecyclerView.Adapter<MainPageFragmentAdapter.ViewHolder> {
 
-  private List<String> mDatas;
+  private List<MainPageFragmentListBean> mDatas;
   private LayoutInflater mInflater;
   private Context context;
 
-  public MainPageFragmentAdapter(Context mContext, List<String> mDatas) {
+  public MainPageFragmentAdapter(Context mContext, List<MainPageFragmentListBean> mDatas) {
     this.context = mContext;
     this.mDatas = mDatas;
     mInflater = LayoutInflater.from(mContext);
   }
 
-  public List<String> getDatas() {
+  public List<MainPageFragmentListBean> getDatas() {
     return mDatas;
   }
 
-  public MainPageFragmentAdapter setDatas(List<String> datas) {
+  public MainPageFragmentAdapter setDatas(List<MainPageFragmentListBean> datas) {
     mDatas = datas;
     return this;
   }
@@ -44,8 +47,11 @@ public class MainPageFragmentAdapter
 
   @SuppressLint("SetTextI18n") @Override public void onBindViewHolder(ViewHolder holder,
       @SuppressLint("RecyclerView") final int position) {
-    String text = mDatas.get(position);
-    holder.tvTitle.setText(text);
+    MainPageFragmentListBean mainPageFragmentListBean = mDatas.get(position);
+    Glide.with(context).load(mainPageFragmentListBean.getImg()).into(holder.imgListAvatar);
+    holder.tvTip.setText(mainPageFragmentListBean.getTip());
+    holder.tvName.setText(mainPageFragmentListBean.getName());
+    holder.tvLookAccount.setText(mainPageFragmentListBean.getAccount());
     holder.layoutContent.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         mainPageFragmentAdapterCallBack.onClick(position);
@@ -53,7 +59,7 @@ public class MainPageFragmentAdapter
     });
   }
 
-  public void addAll(List<String> datas) {
+  public void addAll(List<MainPageFragmentListBean> datas) {
     mDatas.addAll(datas);
     notifyDataSetChanged();
   }
@@ -63,7 +69,7 @@ public class MainPageFragmentAdapter
     notifyDataSetChanged();
   }
 
-  public void addNewAll(List<String> datas) {
+  public void addNewAll(List<MainPageFragmentListBean> datas) {
     mDatas.clear();
     mDatas.addAll(datas);
     notifyDataSetChanged();
@@ -82,7 +88,10 @@ public class MainPageFragmentAdapter
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.tv_item_main_page) TextView tvTitle;
+    @BindView(R.id.img_main_page_fragment_list_avatar) ImageView imgListAvatar;
+    @BindView(R.id.tv_main_page_fragment_tip) TextView tvTip;
+    @BindView(R.id.tv_main_page_fragment_name) TextView tvName;
+    @BindView(R.id.tv_main_page_fragment_look_account) TextView tvLookAccount;
     @BindView(R.id.layout_item_main_page_content) LinearLayout layoutContent;
 
     public ViewHolder(View itemView) {

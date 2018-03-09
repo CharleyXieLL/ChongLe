@@ -1,17 +1,11 @@
 package com.jiajia.badou.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.PetCompileActivity;
@@ -21,15 +15,18 @@ import com.jiajia.badou.mine.Config;
 import com.jiajia.badou.mine.StackAdapter;
 import com.jiajia.badou.mine.StackLayoutManager;
 import com.jiajia.badou.view.BigAvatarView;
+import com.jiajia.presenter.modle.main.MineFragmentMvpView;
+import com.jiajia.presenter.modle.main.MineFragmentPresenter;
 import com.makeramen.roundedimageview.RoundedImageView;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Lei on 2018/1/30.
  * 个人中心
  */
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment<MineFragmentPresenter>
+    implements MineFragmentMvpView {
 
   @BindView(R.id.img_mine_fragment_reset) ImageView imgReset;
   @BindView(R.id.img_mine_fragment_avatar) RoundedImageView imgAvatar;
@@ -48,16 +45,11 @@ public class MineFragment extends BaseFragment {
     return new MineFragment();
   }
 
-  @Nullable @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main_mine, container, false);
-    ButterKnife.bind(this, view);
-    return view;
+  @Override protected int onCreateViewId() {
+    return R.layout.fragment_main_mine;
   }
 
-  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+  @Override protected void init() {
     initUi();
     initBigAvatarView();
   }
@@ -67,19 +59,21 @@ public class MineFragment extends BaseFragment {
   }
 
   private void initUi() {
-    List<String> datas = new ArrayList<>();
-    for (int i = 0; i < 15; i++) {
-      datas.add(String.valueOf(i));
-    }
+    List<String> imageUrls =
+        Arrays.asList("https://s1.1zoom.ru/big0/453/Dogs_Spitz_Winter_hat_471485.jpg",
+            "https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=78bde825a586c9171c0e5a6ba8541baa/63d9f2d3572c11df449bb3fe612762d0f603c2a1.jpg",
+            "http://img02.tooopen.com/Downs/images/2010/9/9/sy_20100909075330671012.jpg",
+            "http://first-vet.bg/wp-content/uploads/2014/09/dogcat23.jpg",
+            "http://www.rainbowbridge-pet.com/index/pics/20170223/201702231487847321740.png");
     Config config = new Config();
     config.secondaryScale = 0.8f;
     config.scaleRatio = 0.4f;
     config.maxStackCount = 4;
-    config.initialStackCount = 2;
+    config.initialStackCount = 0;
     config.space = 15;
     config.align = Align.LEFT;
     recyclerView.setLayoutManager(new StackLayoutManager(config));
-    recyclerView.setAdapter(new StackAdapter(datas));
+    recyclerView.setAdapter(new StackAdapter(imageUrls));
   }
 
   @OnClick({
@@ -99,5 +93,10 @@ public class MineFragment extends BaseFragment {
       default:
         break;
     }
+  }
+
+  @Override public void getFailed(String msg, String code) {
+    dismissLoadingDialog();
+    showToast(msg);
   }
 }

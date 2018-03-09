@@ -154,6 +154,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     switch (view.getId()) {
       case R.id.super_tv_login_submit:
         if (login()) {
+          showLoadingDialog("");
           getPresenter().checkAccountCanRegister(phoneNumber);
         }
         break;
@@ -210,6 +211,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   }
 
   @Override public void loginSuccess(LoginSuccessBean loginSuccessBean) {
+    dismissLoadingDialog();
     BaseSharedDataUtil.setUserId(getApplicationContext(), loginSuccessBean.getId());
     startActivity(MainActivity.callIntent(activity));
     finish();
@@ -217,11 +219,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
   @Override public void checkAccountSuccess() {
     dismissLoadingDialog();
-    ExitView exitView = new ExitView(activity);
+    final ExitView exitView = new ExitView(activity);
     exitView.setMsg("当前账号未注册\n是否前去注册？");
     exitView.setExitViewCallBack(new InterfaceUtil.ExitViewCallBack() {
       @Override public void exitViewLoginOut() {
-        dismissLoadingDialog();
+        exitView.dismissDialog();
         startActivity(RegisterActivity.callIntent(activity, phoneNumber));
       }
 
@@ -232,7 +234,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   }
 
   @Override public void checkAccountFailed() {
-    dismissLoadingDialog();
     getPresenter().login(phoneNumber, password);
   }
 

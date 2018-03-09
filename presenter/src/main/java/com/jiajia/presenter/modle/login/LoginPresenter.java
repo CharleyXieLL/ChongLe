@@ -6,13 +6,14 @@ import com.jiajia.presenter.net.HttpUtil;
 import com.jiajia.presenter.net.OkGoHttpAction;
 import com.jiajia.presenter.net.OkGoHttpActionNoBean;
 import com.jiajia.presenter.net.gson.Result;
+import javax.inject.Inject;
 
 /**
  * Created by Lei on 2018/3/1.
  */
 public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
-  public LoginPresenter() {
+  @Inject public LoginPresenter() {
 
   }
 

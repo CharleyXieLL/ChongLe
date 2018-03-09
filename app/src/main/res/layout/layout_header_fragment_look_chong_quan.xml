@@ -10,7 +10,8 @@
   <ImageView
       android:id="@+id/img_fragment_look_chong_quan_title"
       android:layout_width="match_parent"
-      android:layout_height="120dp"
+      android:layout_height="160dp"
+      android:scaleType="fitXY"
       android:padding="20dp"
       />
 </LinearLayout>
