@@ -1,13 +1,13 @@
 package com.jiajia.badou.activity;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
@@ -26,9 +26,9 @@ import com.jiajia.badou.fragment.MineFragment;
 import com.jiajia.badou.fragment.StoreFragment;
 import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.util.GPSUtil;
+import com.jiajia.badou.util.baidu.QtLocationClient;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
-import com.jiajia.badou.util.baidu.QtLocationClient;
 
 public class MainActivity extends BaseActivity {
 
@@ -138,16 +138,45 @@ public class MainActivity extends BaseActivity {
    */
   public void tarGetFragment(Fragment fragment) {
     if (currentFragment == fragment) return;
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
     try {
       if (!mStateSaved) {
         setCurrentFragment(fragment);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_fragment_content, fragment, "").commitAllowingStateLoss();
+        hideAllFragment(transaction);
+        if (fragment.isAdded()) {
+          transaction.show(fragment).commitAllowingStateLoss();
+        } else {
+          transaction.add(R.id.main_fragment_content, fragment)
+              .show(fragment)
+              .commitAllowingStateLoss();
+        }
+        // transaction.replace(R.id.main_fragment_content, fragment, "").commitAllowingStateLoss();
       }
     } catch (IllegalStateException e) {
       setCurrentFragment(fragment);
-      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-      transaction.replace(R.id.main_fragment_content, fragment, "").commitAllowingStateLoss();
+      if (fragment.isAdded()) {
+        transaction.show(fragment).commitAllowingStateLoss();
+      } else {
+        transaction.add(R.id.main_fragment_content, fragment)
+            .show(fragment)
+            .commitAllowingStateLoss();
+      }
+      //transaction.replace(R.id.main_fragment_content, fragment, "").commitAllowingStateLoss();
+    }
+  }
+
+  private void hideAllFragment(FragmentTransaction transaction) {
+    if (mainPageFragment != null) {
+      transaction.hide(mainPageFragment);
+    }
+    if (storeFragment != null) {
+      transaction.hide(storeFragment);
+    }
+    if (lookFragment != null) {
+      transaction.hide(lookFragment);
+    }
+    if (mineFragment != null) {
+      transaction.hide(mineFragment);
     }
   }
 
@@ -195,22 +224,6 @@ public class MainActivity extends BaseActivity {
     }
     if (isProcessed) {
       super.onBackPressed();
-    }
-  }
-
-  private void hideAllFragment() {
-    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    if (mainPageFragment != null) {
-      transaction.hide(mainPageFragment).commitAllowingStateLoss();
-    }
-    if (storeFragment != null) {
-      transaction.hide(storeFragment).commitAllowingStateLoss();
-    }
-    if (lookFragment != null) {
-      transaction.hide(lookFragment).commitAllowingStateLoss();
-    }
-    if (mineFragment != null) {
-      transaction.hide(mineFragment).commitAllowingStateLoss();
     }
   }
 

@@ -1,6 +1,7 @@
 package com.jiajia.badou.fragment;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -74,6 +75,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
     config.align = Align.LEFT;
     recyclerView.setLayoutManager(new StackLayoutManager(config));
     recyclerView.setAdapter(new StackAdapter(imageUrls));
+    Log.i("SSS", "刷新了");
   }
 
   @OnClick({

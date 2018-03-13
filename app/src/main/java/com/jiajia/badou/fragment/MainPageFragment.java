@@ -3,6 +3,7 @@ package com.jiajia.badou.fragment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -55,6 +56,7 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
   }
 
   @Override protected void init() {
+    Log.i("SSS", "刷新了");
     initView();
     initInputMethod();
     initEdit();
