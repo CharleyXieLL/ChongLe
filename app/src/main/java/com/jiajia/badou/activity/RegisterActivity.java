@@ -3,7 +3,6 @@ package com.jiajia.badou.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.InputType;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
@@ -76,10 +74,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     return intent;
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_register);
-    ButterKnife.bind(this);
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return R.layout.activity_register;
+  }
+
+  @Override protected void init() {
     setPresenter(new RegisterPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();

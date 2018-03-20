@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -16,9 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
+import com.jiajia.badou.bean.event.JumpStoreEvent;
 import com.jiajia.badou.fragment.BaseFragment;
 import com.jiajia.badou.fragment.LookFragment;
 import com.jiajia.badou.fragment.MainPageFragment;
@@ -29,11 +28,18 @@ import com.jiajia.badou.util.GPSUtil;
 import com.jiajia.badou.util.baidu.QtLocationClient;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseActivity {
 
   public static final String LOOK_TITLE_TYPE = "look_title_type";
   public static final int BACKPRESSED_DURATION = 2000;
+
+  private static final int MAIN_PAGE_FRAGMENT = 1;
+  private static final int STORE_FRAGMENT = 2;
+  private static final int LOOK_FRAGMENT = 3;
+  private static final int MINE_FRAGMENT = 4;
 
   @BindView(R.id.main_fragment_content) FrameLayout mainFragmentContent;
 
@@ -87,10 +93,15 @@ public class MainActivity extends BaseActivity {
     return new Intent(context, MainActivity.class);
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return R.layout.activity_main;
+  }
+
+  @Override protected void init() {
     ActManager.getAppManager().add(this);
     initView();
   }
@@ -187,16 +198,25 @@ public class MainActivity extends BaseActivity {
   @Override protected void onResume() {
     super.onResume();
     mStateSaved = false;
+    if (mineFragment != null && mineFragment.isAdded()) {
+      mineFragment.onResumeFragment();
+    }
   }
 
   @Override protected void onStop() {
     mStateSaved = true;
     super.onStop();
+    bus.unregister(this);
   }
 
   @Override protected void onPause() {
     mStateSaved = true;
     super.onPause();
+  }
+
+  @Override protected void onStart() {
+    super.onStart();
+    bus.register(this);
   }
 
   @Override protected void onDestroy() {
@@ -232,8 +252,30 @@ public class MainActivity extends BaseActivity {
       R.id.layout_main_check_mine
   }) public void onViewClicked(View view) {
     dismissLoadingDialog();
+    int fragmentTag = 1;
     switch (view.getId()) {
       case R.id.layout_main_check_main_page:
+        fragmentTag = MAIN_PAGE_FRAGMENT;
+        break;
+      case R.id.layout_main_check_store:
+        fragmentTag = STORE_FRAGMENT;
+        break;
+      case R.id.layout_main_check_look:
+        fragmentTag = LOOK_FRAGMENT;
+        break;
+      case R.id.layout_main_check_mine:
+        fragmentTag = MINE_FRAGMENT;
+        break;
+    }
+    switchFragment(fragmentTag);
+  }
+
+  /**
+   * 切换 fragment
+   */
+  private void switchFragment(int fragmentTag) {
+    switch (fragmentTag) {
+      case MAIN_PAGE_FRAGMENT:
         tarGetFragment(mainPageFragment);
         tvTabMain.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.main_check_true));
         tvTabStore.setTextColor(
@@ -251,7 +293,7 @@ public class MainActivity extends BaseActivity {
           mainPageFragment.setLocation(locationText);
         }
         break;
-      case R.id.layout_main_check_store:
+      case STORE_FRAGMENT:
         tarGetFragment(storeFragment);
         tvTabMain.setTextColor(
             ContextCompat.getColor(MainActivity.this, R.color.yq_text_color_blank));
@@ -265,7 +307,7 @@ public class MainActivity extends BaseActivity {
         imgMainCheckLook.setBackgroundResource(R.mipmap.check_look_false);
         imgMainCheckMine.setBackgroundResource(R.mipmap.check_mine_false);
         break;
-      case R.id.layout_main_check_look:
+      case LOOK_FRAGMENT:
         tarGetFragment(lookFragment);
         tvTabMain.setTextColor(
             ContextCompat.getColor(MainActivity.this, R.color.yq_text_color_blank));
@@ -283,7 +325,7 @@ public class MainActivity extends BaseActivity {
           lookFragment.setTitleType(lookTitleType);
         }
         break;
-      case R.id.layout_main_check_mine:
+      case MINE_FRAGMENT:
         tarGetFragment(mineFragment);
         tvTabMain.setTextColor(
             ContextCompat.getColor(MainActivity.this, R.color.yq_text_color_blank));
@@ -296,6 +338,8 @@ public class MainActivity extends BaseActivity {
         imgMainCheckStore.setBackgroundResource(R.mipmap.check_store_false);
         imgMainCheckLook.setBackgroundResource(R.mipmap.check_look_false);
         imgMainCheckMine.setBackgroundResource(R.mipmap.check_mine_true);
+        break;
+      default:
         break;
     }
   }
@@ -331,5 +375,10 @@ public class MainActivity extends BaseActivity {
 
   @Override public void getFailed(String msg, String code) {
     dismissLoadingDialog();
+  }
+
+  @Subscribe(threadMode = ThreadMode.MAIN)
+  public void onJumpStoreFragmentEvent(JumpStoreEvent event) {
+    switchFragment(STORE_FRAGMENT);
   }
 }

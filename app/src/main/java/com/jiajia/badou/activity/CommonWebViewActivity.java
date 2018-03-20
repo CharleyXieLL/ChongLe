@@ -13,11 +13,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -75,9 +73,15 @@ public class CommonWebViewActivity extends BaseActivity {
     return intent;
   }
 
-  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.api_common_webview);
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return R.layout.api_common_webview;
+  }
+
+  @Override protected void init() {
     initUi();
     initData();
     initWebView();

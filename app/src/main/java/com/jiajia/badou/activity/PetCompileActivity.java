@@ -9,21 +9,22 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.badou.adapter.ReportLendPeopleAdapter;
 import com.jiajia.badou.util.ActManager;
-import com.jiajia.presenter.util.ChongLeConfig;
-import com.jiajia.presenter.util.ToastUtil;
+import com.jiajia.badou.util.BaseSharedDataUtil;
 import com.jiajia.badou.view.BigAvatarView;
 import com.jiajia.badou.view.CommonPopWindow;
 import com.jiajia.badou.view.ReportLendPeopleDialog;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
 import com.jiajia.badou.view.wheelview.CalendarView;
+import com.jiajia.presenter.util.ChongLeConfig;
+import com.jiajia.presenter.util.Strings;
+import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.model.TResult;
 import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
@@ -68,9 +69,18 @@ public class PetCompileActivity extends TakePhotoActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_pet_compile);
-    ButterKnife.bind(this);
     ActManager.getAppManager().add(this);
+  }
+
+  @Override protected int onCreateViewTitle() {
+    return 0;
+  }
+
+  @Override protected int onCreateView() {
+    return R.layout.activity_pet_compile;
+  }
+
+  @Override protected void initUi() {
     initView();
     initCalendarView();
     initReportDialog();
@@ -132,6 +142,10 @@ public class PetCompileActivity extends TakePhotoActivity {
   }
 
   private void initView() {
+    String imgPath = BaseSharedDataUtil.getPetAvatar(activity);
+    if (!Strings.isNullOrEmpty(imgPath)) {
+      Glide.with(PetCompileActivity.this).load(imgPath).error(R.mipmap.ic_launcher).into(imgAvatar);
+    }
     tvTitleRight.setText("添加宠物");
     tvTitleRight.setTextColor(
         ContextCompat.getColor(PetCompileActivity.this, R.color.main_check_true));
@@ -140,7 +154,6 @@ public class PetCompileActivity extends TakePhotoActivity {
       upLoadAvatarView = new UpLoadAvatarView(PetCompileActivity.this, getTakePhoto());
       upLoadAvatarView.setUpLoadAvatarViewCallBack(new UpLoadAvatarView.UpLoadAvatarViewCallBack() {
         @Override public void onTakeSuccess(String path) {
-          // todo 上传到头像至服务器
           Glide.with(PetCompileActivity.this)
               .load(path)
               .error(R.mipmap.ic_launcher)
@@ -256,7 +269,7 @@ public class PetCompileActivity extends TakePhotoActivity {
 
   @Override public void takeSuccess(TResult result) {
     super.takeSuccess(result);
-    // todo 上传到头像至服务器
+    BaseSharedDataUtil.setPetAvatar(activity, result.getImage().getOriginalPath());
     Glide.with(PetCompileActivity.this)
         .load(result.getImage().getOriginalPath())
         .error(R.mipmap.ic_launcher)

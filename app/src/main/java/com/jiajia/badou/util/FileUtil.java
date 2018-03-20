@@ -4,11 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 /**
  * Created by chenwei on 2017/6/20.
@@ -81,5 +84,32 @@ public class FileUtil {
       }
     }
     return filePath;
+  }
+
+  public static String setImgFile(String fileName, String filePath) {
+    String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+    File file = new File(path + fileName);
+    FileInputStream inputStream;
+    OutputStream os = null;
+    try {
+      inputStream = new FileInputStream(filePath);
+      os = new FileOutputStream(file);
+      byte buffer[] = new byte[4 * 1024];
+      int len;
+      while ((len = inputStream.read(buffer)) != -1) {
+        os.write(buffer, 0, len);
+      }
+      os.flush();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        assert os != null;
+        os.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return file.getPath();
   }
 }

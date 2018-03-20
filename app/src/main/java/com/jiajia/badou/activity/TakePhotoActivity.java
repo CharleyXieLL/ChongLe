@@ -2,6 +2,8 @@ package com.jiajia.badou.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
@@ -14,9 +16,8 @@ import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 
 /**
  * Created by Lei on 2018/2/28.
- *
  */
-public class TakePhotoActivity extends BaseActivity
+public abstract class TakePhotoActivity extends BaseActivity
     implements TakePhoto.TakeResultListener, InvokeListener {
 
   private static final String TAG = TakePhotoActivity.class.getName();
@@ -27,6 +28,24 @@ public class TakePhotoActivity extends BaseActivity
     getTakePhoto().onCreate(savedInstanceState);
     super.onCreate(savedInstanceState);
   }
+
+  @Override protected int onCreateViewTitleId() {
+    return onCreateViewTitle();
+  }
+
+  @Override protected int onCreateViewId() {
+    return onCreateView();
+  }
+
+  @Override protected void init() {
+    initUi();
+  }
+
+  protected abstract @StringRes int onCreateViewTitle();
+
+  protected abstract @LayoutRes int onCreateView();
+
+  protected abstract void initUi();
 
   @Override protected void onSaveInstanceState(Bundle outState) {
     getTakePhoto().onSaveInstanceState(outState);
@@ -61,7 +80,7 @@ public class TakePhotoActivity extends BaseActivity
   }
 
   @Override public void takeFail(TResult result, String msg) {
-    ToastUtil.showToast(getApplicationContext(),msg,false);
+    ToastUtil.showToast(getApplicationContext(), msg, false);
   }
 
   @Override public void takeCancel() {

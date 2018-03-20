@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_item_pet_primp_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/yj_pressed"
+    android:orientation="vertical"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="16dp"
+      >
+
+    <ImageView
+        android:id="@+id/img_item_pet_primp"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:background="@mipmap/ic_launcher"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+      <TextView
+          android:id="@+id/tv_item_pet_primp_title"
+          android:textSize="@dimen/yq_headline"
+          tools:text="宠乐宠物中心"
+          style="@style/yq_text_black"
+          />
+
+      <TextView
+          android:id="@+id/tv_item_pet_primp_address"
+          android:layout_marginTop="7dp"
+          android:drawableLeft="@mipmap/address"
+          android:drawablePadding="10dp"
+          android:textSize="@dimen/yq_body"
+          tools:text="杭州市西湖区222号"
+          style="@style/yq_text_black"
+          />
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="7dp"
+          android:orientation="horizontal"
+          >
+        <TextView
+            android:id="@+id/tv_item_pet_primp_address2"
+            android:textSize="@dimen/yq_body"
+            tools:text="西湖区"
+            style="@style/yq_text_black"
+            />
+        <TextView
+            android:id="@+id/tv_item_pet_primp_distance"
+            android:layout_marginLeft="20dp"
+            android:textSize="@dimen/yq_body"
+            tools:text="1.1km"
+            style="@style/yq_text_black"
+            />
+      </LinearLayout>
+
+      <View
+          android:layout_marginTop="16dp"
+          style="@style/yq_line_style"
+          />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            >
+          <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
+              android:layout_marginTop="2dp"
+              android:background="@mipmap/call_phone"
+              />
+          <TextView
+              android:id="@+id/tv_item_pet_primp_phone"
+              android:layout_marginLeft="10dp"
+              android:gravity="center"
+              tools:text="13928738492"
+              style="@style/yq_text_black"
+              />
+        </LinearLayout>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/super_tv_item_pet_primp_submit"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            app:sCenterTextColor="@color/white"
+            app:sCenterTextSize="@dimen/yq_title"
+            app:sCenterTextString="预约"
+            app:sDividerLineType="none"
+            app:sShapeCornersRadius="4dp"
+            app:sShapeSelectorNormalColor="@color/main_check_true"
+            app:sShapeSelectorPressedColor="@color/main_check_true"
+            app:sUseShape="true"
+            />
+
+      </RelativeLayout>
+    </LinearLayout>
+  </LinearLayout>
+
+  <View
+      style="@style/yq_line_style"
+      />
+
+</LinearLayout>

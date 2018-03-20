@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
@@ -25,6 +24,7 @@ import com.jiajia.badou.view.ExitView;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
 import com.jiajia.presenter.util.ChongLeConfig;
+import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.model.TResult;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -62,8 +62,17 @@ public class UserCompileActivity extends TakePhotoActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_user_compile);
-    ButterKnife.bind(this);
+  }
+
+  @Override protected int onCreateViewTitle() {
+    return 0;
+  }
+
+  @Override protected int onCreateView() {
+    return R.layout.activity_user_compile;
+  }
+
+  @Override protected void initUi() {
     initBaseUi();
     initUpLoadAvatarView();
     initCommonPopWindow();
@@ -73,13 +82,19 @@ public class UserCompileActivity extends TakePhotoActivity {
 
   private void initBaseUi() {
     tvBaseTitleRight.setText("保存");
+    String imgPath = BaseSharedDataUtil.getUserAvatar(activity);
+    if (!Strings.isNullOrEmpty(imgPath)) {
+      Glide.with(UserCompileActivity.this)
+          .load(imgPath)
+          .error(R.mipmap.ic_launcher)
+          .into(imgAvatar);
+    }
   }
 
   private void initUpLoadAvatarView() {
     upLoadAvatarView = new UpLoadAvatarView(UserCompileActivity.this, getTakePhoto());
     upLoadAvatarView.setUpLoadAvatarViewCallBack(new UpLoadAvatarView.UpLoadAvatarViewCallBack() {
       @Override public void onTakeSuccess(String path) {
-        // todo 上传到头像至服务器
         Glide.with(UserCompileActivity.this).load(path).error(R.mipmap.ic_launcher).into(imgAvatar);
       }
     });
@@ -207,10 +222,10 @@ public class UserCompileActivity extends TakePhotoActivity {
 
   @Override public void takeSuccess(TResult result) {
     super.takeSuccess(result);
-    // todo 上传到头像至服务器
+    BaseSharedDataUtil.setUserAvatar(activity, result.getImage().getOriginalPath());
     Glide.with(UserCompileActivity.this)
         .load(result.getImage().getOriginalPath())
-        .error(R.mipmap.ic_launcher)
+        .error(R.mipmap.yj_defoult_user_head)
         .into(imgAvatar);
   }
 }

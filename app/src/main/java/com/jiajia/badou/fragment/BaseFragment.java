@@ -15,6 +15,7 @@ import com.jiajia.badou.activity.MainActivity;
 import com.jiajia.presenter.impl.MvpView;
 import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.ToastUtil;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Lei on 2018/2/7.
@@ -28,6 +29,8 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
 
   protected Activity activity;
 
+  protected EventBus bus;
+
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     activity = getActivity();
+    bus = EventBus.getDefault();
     init();
   }
 

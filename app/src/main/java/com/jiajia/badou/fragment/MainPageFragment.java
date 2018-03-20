@@ -3,15 +3,17 @@ package com.jiajia.badou.fragment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.CommonWebViewActivity;
+import com.jiajia.badou.activity.PetPrimpActivity;
 import com.jiajia.badou.adapter.MainPageFragmentAdapter;
+import com.jiajia.badou.bean.event.JumpStoreEvent;
 import com.jiajia.badou.view.GlideImageLoader;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
 import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
@@ -26,6 +28,7 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Lei on 2018/1/30.
@@ -56,7 +59,6 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
   }
 
   @Override protected void init() {
-    Log.i("SSS", "刷新了");
     initView();
     initInputMethod();
     initEdit();
@@ -82,6 +84,8 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
             false);
     banner = headerView.findViewById(R.id.fragment_main_page_banner);
 
+    initHeaderViewUi(headerView);
+
     initBanner();
 
     adapter = new MainPageFragmentAdapter(getActivity(), new ArrayList<MainPageFragmentListBean>());
@@ -92,6 +96,28 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     recyclerView.addHeaderView(headerView);
 
     initListBean();
+  }
+
+  private void initHeaderViewUi(View view) {
+    ImageView imgStore = view.findViewById(R.id.img_main_service_store);
+    ImageView imgMedicalTreatment = view.findViewById(R.id.img_main_service_yiliao);
+    ImageView imgPrimp = view.findViewById(R.id.img_main_service_meirong);
+
+    imgStore.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        EventBus.getDefault().post(new JumpStoreEvent());
+      }
+    });
+    imgMedicalTreatment.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+
+      }
+    });
+    imgPrimp.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        activity.startActivity(PetPrimpActivity.callIntent(activity));
+      }
+    });
   }
 
   private void initListBean() {

@@ -32,6 +32,16 @@ public final class BaseSharedDataUtil {
   private static final String USER_ID = "user_id";
 
   /**
+   * 用户头像
+   */
+  private static final String USER_AVATAR = "user_avatar";
+
+  /**
+   * 宠物头像
+   */
+  private static final String PET_AVATAR = "pet_avatar";
+
+  /**
    * 保存手机号
    */
   public static void setPhoneNo(Context context, String mobelphoneno) {
@@ -57,6 +67,22 @@ public final class BaseSharedDataUtil {
    */
   public static String getToken(Context context) {
     return getSharedPrefUtil(context).getString(TOKEN, "");
+  }
+
+  public static void setUserAvatar(Context context, String userAvatar) {
+    getSharedPrefUtil(context).putString(USER_AVATAR, userAvatar).apply();
+  }
+
+  public static String getUserAvatar(Context context) {
+    return getSharedPrefUtil(context).getString(USER_AVATAR, "");
+  }
+
+  public static void setPetAvatar(Context context, String avatar) {
+    getSharedPrefUtil(context).putString(PET_AVATAR, avatar).apply();
+  }
+
+  public static String getPetAvatar(Context context) {
+    return getSharedPrefUtil(context).getString(PET_AVATAR, "");
   }
 
   public static void setUserId(Context context, long userId) {

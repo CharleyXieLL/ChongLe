@@ -1,13 +1,13 @@
 package com.jiajia.badou.fragment;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.PetCompileActivity;
 import com.jiajia.badou.activity.UserCompileActivity;
@@ -15,6 +15,7 @@ import com.jiajia.badou.mine.Align;
 import com.jiajia.badou.mine.Config;
 import com.jiajia.badou.mine.StackAdapter;
 import com.jiajia.badou.mine.StackLayoutManager;
+import com.jiajia.badou.util.BaseSharedDataUtil;
 import com.jiajia.badou.view.BigAvatarView;
 import com.jiajia.presenter.modle.main.MineFragmentMvpView;
 import com.jiajia.presenter.modle.main.MineFragmentPresenter;
@@ -67,7 +68,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
             "http://first-vet.bg/wp-content/uploads/2014/09/dogcat23.jpg",
             "http://www.rainbowbridge-pet.com/index/pics/20170223/201702231487847321740.png");
     Config config = new Config();
-    config.secondaryScale = 0.8f;
+    config.secondaryScale = 0.9f;
     config.scaleRatio = 0.4f;
     config.maxStackCount = 4;
     config.initialStackCount = 0;
@@ -75,7 +76,18 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
     config.align = Align.LEFT;
     recyclerView.setLayoutManager(new StackLayoutManager(config));
     recyclerView.setAdapter(new StackAdapter(imageUrls));
-    Log.i("SSS", "刷新了");
+
+    Glide.with(activity)
+        .load(BaseSharedDataUtil.getUserAvatar(activity))
+        .error(R.mipmap.yj_defoult_user_head)
+        .into(imgAvatar);
+  }
+
+  public void onResumeFragment() {
+    Glide.with(activity)
+        .load(BaseSharedDataUtil.getUserAvatar(activity))
+        .error(R.mipmap.yj_defoult_user_head)
+        .into(imgAvatar);
   }
 
   @OnClick({

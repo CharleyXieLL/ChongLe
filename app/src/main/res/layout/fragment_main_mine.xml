@@ -31,8 +31,8 @@
           android:id="@+id/img_mine_fragment_reset"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_alignParentRight="true"
           android:layout_alignParentBottom="true"
+          android:layout_alignParentRight="true"
           android:layout_marginBottom="16dp"
           android:background="@mipmap/mine_reset"
           />
@@ -140,17 +140,20 @@
         android:layout_height="40dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="20dp"
         >
 
       <TextView
+          android:layout_marginTop="20dp"
           android:text="我的宠物"
           style="@style/yq_text_black"
           />
 
       <TextView
           android:id="@+id/tv_mine_fragment_my_pet_reset"
+          android:layout_width="60dp"
+          android:layout_height="50dp"
           android:layout_alignParentRight="true"
+          android:gravity="bottom|right"
           android:text="编辑"
           android:textColor="@color/main_check_true"
           android:textSize="14sp"
@@ -161,7 +164,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_mine_fragment_pet_card"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         />
 

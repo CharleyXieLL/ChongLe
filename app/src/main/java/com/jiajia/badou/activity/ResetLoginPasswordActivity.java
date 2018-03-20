@@ -3,7 +3,6 @@ package com.jiajia.badou.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
@@ -72,10 +70,15 @@ public class ResetLoginPasswordActivity extends BaseActivity<ForgetPasswordPrese
     return intent;
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_forget_password);
-    ButterKnife.bind(this);
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return R.layout.activity_forget_password;
+  }
+
+  @Override protected void init() {
     setPresenter(new ForgetPasswordPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();

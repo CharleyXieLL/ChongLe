@@ -24,6 +24,18 @@ public class PushApiActivity extends BaseActivity {
     }
   }
 
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return 0;
+  }
+
+  @Override protected void init() {
+
+  }
+
   @Override public void getFailed(String msg, String code) {
 
   }

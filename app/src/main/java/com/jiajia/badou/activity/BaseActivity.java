@@ -4,15 +4,23 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import butterknife.ButterKnife;
 import com.jiajia.badou.R;
 import com.jiajia.badou.view.LoadingProgress;
 import com.jiajia.presenter.impl.MvpView;
 import com.jiajia.presenter.impl.Presenter;
+import com.jiajia.presenter.util.ChongLeConfig;
 import com.jiajia.presenter.util.StatusBarUtils;
 import com.jiajia.presenter.util.ToastUtil;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Lei on 2018/1/26.
@@ -25,11 +33,43 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
 
   protected Activity activity;
 
+  protected EventBus bus;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(onCreateViewId());
+    ButterKnife.bind(this);
     setStatusBar();
     activity = this;
+    bus = EventBus.getDefault();
+    init();
+    returnBack();
+    setTitleString();
   }
+
+  private void setTitleString() {
+    TextView title = findViewById(R.id.api_base_title);
+    if (title != null && onCreateViewTitleId() != ChongLeConfig.ZERO) {
+      title.setText(onCreateViewTitleId());
+    }
+  }
+
+  protected abstract @StringRes int onCreateViewTitleId();
+
+  private void returnBack() {
+    RelativeLayout layoutBack = findViewById(R.id.yq_base_back_arrow_iv);
+    if (layoutBack != null) {
+      layoutBack.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+          finish();
+        }
+      });
+    }
+  }
+
+  protected abstract @LayoutRes int onCreateViewId();
+
+  protected abstract void init();
 
   private LoadingProgress loadingProgress = null;
 

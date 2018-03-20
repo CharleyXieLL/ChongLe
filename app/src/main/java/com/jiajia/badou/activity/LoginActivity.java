@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
@@ -76,9 +75,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_login);
-    ButterKnife.bind(this);
     setPresenter(new LoginPresenter());
+  }
+
+  @Override protected int onCreateViewTitleId() {
+    return 0;
+  }
+
+  @Override protected int onCreateViewId() {
+    return R.layout.activity_login;
+  }
+
+  @Override protected void init() {
     setStatusBar();
     initEditText();
     initIntentData();
