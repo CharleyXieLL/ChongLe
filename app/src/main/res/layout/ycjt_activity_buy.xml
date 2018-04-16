@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yq_c_bg"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:orientation="vertical"
+      >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        >
+      <ImageView
+          android:id="@+id/img_buy_title"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="fitXY"
+          />
+      <RelativeLayout
+          android:id="@+id/layout_buy_title"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          >
+        <RelativeLayout
+            android:id="@+id/cl_buy_return_back"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:padding="10dp"
+            >
+
+          <ImageView
+              android:id="@+id/img_buy_back"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+              android:layout_centerVertical="true"
+              android:background="@mipmap/base_return_back"
+              />
+        </RelativeLayout>
+      </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_buy_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:gravity="left"
+        android:textColor="@color/yj_black"
+        android:textSize="15sp"
+        tools:text="毛狗窝可拆洗泰迪狗狗保暖"
+        style="@style/yq_text_black"
+        />
+
+    <TextView
+        android:id="@+id/tv_buy_account"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/yj_main_letter_dot"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="¥ 345"
+        style="@style/yq_text_black"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          >
+        <TextView
+            android:text="价格："
+            android:textSize="12sp"
+            style="@style/yq_text_98"
+            />
+        <TextView
+            android:id="@+id/tv_buy_old_account"
+            android:textSize="12sp"
+            tools:text="¥ 345"
+            style="@style/yq_text_98"
+            />
+      </LinearLayout>
+
+      <TextView
+          android:id="@+id/tv_buy_surplus"
+          android:layout_alignParentRight="true"
+          android:textSize="12sp"
+          tools:text="库存  124"
+          style="@style/yq_text_black"
+          />
+    </RelativeLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        style="@style/yq_line_style"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+      <TextView
+          android:id="@+id/tv_buy_sales_volume_every_month"
+          android:layout_alignParentRight="true"
+          android:layout_gravity="center_vertical"
+          android:textSize="12sp"
+          tools:text="月销量  124"
+          style="@style/yq_text_black"
+          />
+      <TextView
+          android:layout_width="0dp"
+          android:layout_alignParentRight="true"
+          android:layout_gravity="center_vertical"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:text="正品保障"
+          android:textSize="12sp"
+          style="@style/yq_text_black"
+          />
+      <TextView
+          android:id="@+id/tv_buy_address"
+          android:layout_alignParentRight="true"
+          android:layout_gravity="center_vertical"
+          android:textSize="12sp"
+          tools:text="浙江杭州"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentBottom="true"
+      android:orientation="horizontal"
+      >
+    <TextView
+        android:id="@+id/tv_buy_put_in_car"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/yj_main_letter_dot"
+        android:gravity="center"
+        android:text="加入购入车"
+        android:textColor="@color/white"
+        android:textSize="@dimen/yq_body"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tv_buy_submit"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/yj_warning_red"
+        android:gravity="center"
+        android:text="立即购买"
+        android:textColor="@color/white"
+        android:textSize="@dimen/yq_body"
+        android:textStyle="bold"
+        />
+  </LinearLayout>
+
+
+</RelativeLayout>

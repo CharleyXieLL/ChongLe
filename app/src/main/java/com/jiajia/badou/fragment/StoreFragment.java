@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
+import com.jiajia.badou.activity.BuyActivity;
 import com.jiajia.badou.activity.CommonWebViewActivity;
 import com.jiajia.badou.adapter.StoreFragmentAdapter;
 import com.jiajia.badou.adapter.StoreFragmentHotRecommendAdapter;
@@ -97,6 +98,7 @@ public class StoreFragment extends BaseFragment<StoreFragmentPresenter>
     adapter.setStoreFragmentAdapterCallBack(
         new StoreFragmentAdapter.StoreFragmentAdapterCallBack() {
           @Override public void onClick(int position) {
+            startActivity(BuyActivity.callIntent(activity, storeHotRecommendBeans.get(position)));
           }
         });
 
@@ -111,29 +113,29 @@ public class StoreFragment extends BaseFragment<StoreFragmentPresenter>
       storeFragmentHotRecommendAdapter.setStoreFragmentAdapterCallBack(
           new StoreFragmentHotRecommendAdapter.StoreFragmentHotRecommendCallBack() {
             @Override public void onItemClick(int position) {
-
+              startActivity(BuyActivity.callIntent(activity, storeHotRecommendBeans.get(position)));
             }
           });
     }
     storeHotRecommendBeans.clear();
     storeHotRecommendBeans.add(new StoreHotRecommendBean(
         "https://www.coastalsports.co.nz/wp-content/uploads/2016/01/SS12_HeadwaterCollar_OrangeSunset_Zoom.jpg",
-        "可拆卸真皮进口狗狗项圈", "¥1998", "¥2498"));
+        "可拆卸真皮进口狗狗项圈", "¥ 1998", "¥ 2498"));
     storeHotRecommendBeans.add(
         new StoreHotRecommendBean("https://sc02.alicdn.com/kf/HTB1qZE3JVXXXXbTXXXXq6xXFXXXL.jpg",
-            "纯棉耐撕咬猫咪狗狗通用小窝", "¥259", "¥298"));
+            "纯棉耐撕咬猫咪狗狗通用小窝", "¥ 259", "¥ 298"));
     storeHotRecommendBeans.add(new StoreHotRecommendBean(
         "http://pic.qiantucdn.com/58pic/27/12/30/90W58PICSJ4_1024.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS4zLnBuZw==/align/center",
-        "客厅房间装饰宠物画，纯人工制作", "¥29", "¥39"));
+        "客厅房间装饰宠物画，纯人工制作", "¥ 29", "¥ 39"));
     storeHotRecommendBeans.add(new StoreHotRecommendBean(
         "http://img11.360buyimg.com/n12/jfs/t2833/302/3110918137/123060/4fa3451b/57808ee7N436d87e7.jpg",
-        "大体型家宠出门溜圈必备帅气口罩", "¥99", "¥128"));
+        "大体型家宠出门溜圈必备帅气口罩", "¥ 99", "¥ 128"));
     storeHotRecommendBeans.add(new StoreHotRecommendBean(
         "https://ae01.alicdn.com/kf/HTB1QFeqRVXXXXcTXpXXq6xXFXXXR/-.jpg_640x640.jpg",
-        "泰迪专用纯棉马甲带溜圈绳", "¥598", "¥798"));
+        "泰迪专用纯棉马甲带溜圈绳", "¥ 598", "¥ 798"));
     storeHotRecommendBeans.add(new StoreHotRecommendBean(
         "http://www.pawfi.com/images/halloween-despicable-me-2-minion-dog-costume.jpg",
-        "小黄人萌宠马甲，进口包装", "¥389", "¥499"));
+        "小黄人萌宠马甲，进口包装", "¥ 389", "¥ 499"));
     storeFragmentHotRecommendAdapter.addAll(storeHotRecommendBeans, linearHotRecommendList);
     adapter.addAll(storeHotRecommendBeans);
   }

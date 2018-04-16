@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import butterknife.BindView;
 import com.jiajia.badou.R;
-import com.jiajia.badou.util.BaseSharedDataUtil;
 import com.jiajia.presenter.impl.Presenter;
 
 /**
@@ -44,12 +43,13 @@ public class SplashActivity extends BaseActivity {
     handler.postDelayed(new Runnable() {
       @Override public void run() {
         imageView.clearAnimation();
-        long id = BaseSharedDataUtil.getUserId(getApplicationContext());
-        if (id == 0) {
-          startActivity(LoginActivity.callIntent(SplashActivity.this));
-        } else {
-          startActivity(MainActivity.callIntent(SplashActivity.this));
-        }
+        ////long id = BaseSharedDataUtil.getUserId(getApplicationContext());
+        //if (id == 0) {
+        //  startActivity(LoginActivity.callIntent(SplashActivity.this));
+        //} else {
+        //  startActivity(MainActivity.callIntent(SplashActivity.this));
+        //}
+        startActivity(MainActivity.callIntent(SplashActivity.this));
         finish();
       }
     }, 4000);

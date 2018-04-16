@@ -125,6 +125,9 @@
     <activity
         android:name=".activity.PetPrimpDetailActivity"
         android:screenOrientation="portrait"/>
+    <activity
+        android:name=".activity.BuyActivity"
+        android:screenOrientation="portrait"/>
 
     <meta-data
         android:name="com.baidu.lbsapi.API_KEY"

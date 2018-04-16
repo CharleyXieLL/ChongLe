@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingBottom="10dp"
+      android:paddingLeft="20dp"
+      android:paddingTop="10dp"
+      >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_chongquan_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        tools:src="@mipmap/yj_defoult_user_head"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:id="@+id/tv_chongquan_name"
+          android:textSize="@dimen/yq_body"
+          tools:text="巴豆霸霸"
+          style="@style/yq_text_black"
+          />
+      <TextView
+          android:id="@+id/tv_chongquan_publish_time"
+          android:layout_marginTop="3dp"
+          android:textColor="@color/yq_color_a0a0a0"
+          android:textSize="11sp"
+          tools:text="2017.08.04"
+          style="@style/yq_text_black"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+  <ImageView
+      android:id="@+id/img_chongquan_content"
+      android:layout_width="match_parent"
+      android:layout_height="270dp"
+      android:scaleType="fitXY"
+      />
+
+  <TextView
+      android:id="@+id/tv_chongquan_tip"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="10dp"
+      android:gravity="left"
+      android:lineSpacingExtra="5dp"
+      android:textSize="@dimen/yq_body"
+      tools:text="我家龙葵真是个公主"
+      style="@style/yq_text_black"
+      />
+
+  <View
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="10dp"
+      style="@style/yq_line_style"
+      />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="15dp"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      android:paddingTop="15dp"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        >
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="0.5dp"
+            android:background="@mipmap/cl_see"
+            />
+        <TextView
+            android:id="@+id/tv_chongquan_look"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            tools:text="234"
+            style="@style/yq_text_black"
+            />
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="30dp"
+          android:orientation="horizontal"
+          >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="1dp"
+            android:background="@mipmap/cl_aixin_grey"
+            />
+        <TextView
+            android:id="@+id/tv_chongquan_aixin"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            tools:text="234"
+            style="@style/yq_text_black"
+            />
+      </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_chongquan_collect"
+        android:layout_width="25dp"
+        android:layout_height="23dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        tools:src="@mipmap/cl_aixin_blank"
+        />
+
+  </RelativeLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="8dp"
+      android:background="@color/yq_c_bg"
+      />
+
+</LinearLayout>

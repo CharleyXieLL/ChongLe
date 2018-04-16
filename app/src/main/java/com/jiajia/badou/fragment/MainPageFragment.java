@@ -102,10 +102,16 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     ImageView imgStore = view.findViewById(R.id.img_main_service_store);
     ImageView imgMedicalTreatment = view.findViewById(R.id.img_main_service_yiliao);
     ImageView imgPrimp = view.findViewById(R.id.img_main_service_meirong);
+    ImageView imgJiYang = view.findViewById(R.id.img_main_service_jiyang);
 
     imgStore.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         EventBus.getDefault().post(new JumpStoreEvent());
+      }
+    });
+    imgJiYang.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+
       }
     });
     imgMedicalTreatment.setOnClickListener(new View.OnClickListener() {

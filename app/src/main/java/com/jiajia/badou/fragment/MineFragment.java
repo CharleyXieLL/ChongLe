@@ -34,8 +34,6 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
   @BindView(R.id.img_mine_fragment_avatar) RoundedImageView imgAvatar;
   @BindView(R.id.tv_mine_fragment_my_name) TextView tvMyName;
   @BindView(R.id.tv_mine_fragment_sign) TextView tvSign;
-  @BindView(R.id.tv_mine_fragment_order_bill) TextView tvOrderBill;
-  @BindView(R.id.tv_mine_fragment_goods_address) TextView tvGoodsAddress;
   @BindView(R.id.tv_mine_fragment_my_pet_reset) TextView tvMyPetReset;
   @BindView(R.id.relat_mine_fragment_reset) RelativeLayout relatReset;
 

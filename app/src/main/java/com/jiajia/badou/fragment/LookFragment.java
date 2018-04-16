@@ -7,17 +7,17 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
-import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.MainActivity;
-import com.jiajia.badou.adapter.StoreFragmentAdapter;
-import com.jiajia.badou.bean.main.StoreHotRecommendBean;
+import com.jiajia.badou.adapter.ChongQuanAdapter;
+import com.jiajia.badou.adapter.MainPageFragmentAdapter;
+import com.jiajia.badou.bean.ChongQuanBean;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
+import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
 import com.jiajia.presenter.modle.main.LookFragmentMvpView;
 import com.jiajia.presenter.modle.main.LookFragmentPresenter;
 import com.jiajia.presenter.util.Strings;
@@ -43,9 +43,10 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
   @BindView(R.id.recycler_look_fragment_chong_quan) HeaderAndFooterRecyclerView recyclerChongQuan;
   @BindView(R.id.recycler_look_fragment_ke_pu) HeaderAndFooterRecyclerView recyclerKePu;
 
-  private StoreFragmentAdapter chongQuanAdapter;
-  private StoreFragmentAdapter kePuAdapter;
-  private List<StoreHotRecommendBean> storeHotRecommendBeans = new ArrayList<>();
+  private ChongQuanAdapter chongQuanAdapter;
+  private MainPageFragmentAdapter kePuAdapter;
+  private List<MainPageFragmentListBean> mainPageFragmentListBeans = new ArrayList<>();
+  private List<ChongQuanBean> chongQuanBeans = new ArrayList<>();
 
   private String titleType;
 
@@ -61,60 +62,81 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
 
   @Override protected void init() {
 
-    storeHotRecommendBeans.clear();
-    storeHotRecommendBeans.add(new StoreHotRecommendBean(
-        "https://www.coastalsports.co.nz/wp-content/uploads/2016/01/SS12_HeadwaterCollar_OrangeSunset_Zoom.jpg",
-        "可拆卸真皮进口狗狗项圈", "¥1998", "¥2498"));
-    storeHotRecommendBeans.add(
-        new StoreHotRecommendBean("https://sc02.alicdn.com/kf/HTB1qZE3JVXXXXbTXXXXq6xXFXXXL.jpg",
-            "纯棉耐撕咬猫咪狗狗通用小窝", "¥259", "¥298"));
-    storeHotRecommendBeans.add(new StoreHotRecommendBean(
-        "http://pic.qiantucdn.com/58pic/27/12/30/90W58PICSJ4_1024.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS4zLnBuZw==/align/center",
-        "客厅房间装饰宠物画，纯人工制作", "¥29", "¥39"));
-    storeHotRecommendBeans.add(new StoreHotRecommendBean(
-        "http://img11.360buyimg.com/n12/jfs/t2833/302/3110918137/123060/4fa3451b/57808ee7N436d87e7.jpg",
-        "大体型家宠出门溜圈必备帅气口罩", "¥99", "¥128"));
-    storeHotRecommendBeans.add(new StoreHotRecommendBean(
-        "https://ae01.alicdn.com/kf/HTB1QFeqRVXXXXcTXpXXq6xXFXXXR/-.jpg_640x640.jpg",
-        "泰迪专用纯棉马甲带溜圈绳", "¥598", "¥798"));
-    storeHotRecommendBeans.add(new StoreHotRecommendBean(
-        "http://www.pawfi.com/images/halloween-despicable-me-2-minion-dog-costume.jpg",
-        "小黄人萌宠马甲，进口包装", "¥389", "¥499"));
+    initKePuData();
+
+    initChongQuanData();
 
     initChongQuanView();
 
     initKePuView();
   }
 
+  private void initKePuData() {
+    mainPageFragmentListBeans.clear();
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "http://www.ygaiquan.com/UploadFiles/2017/2/2017022010251082838.jpg", "张姐姐教你三大技巧让宠物按时吃饭。",
+        "张姐姐", "253"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "http://n.sinaimg.cn/tech/transform/20170127/SZqG-fxzyxnu9471294.jpg", "如何教一只恶霸犬能顺从的吃药。",
+        "巴豆粑粑", "163"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://pic.sc.chinaz.com/files/pic/pic9/201401/apic3177.jpg",
+            "如何给心爱的宝宝制作精美的住所。", "小楠", "89"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://s1.1zoom.me/big3/945/367740-svetik.jpg",
+            "给宝宝吃这些的时候千万要注意以下几点。", "爱上茶", "353"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://vistanews.ru/uploads/posts/2016-01/1451920325_8.jpg",
+            "换季宝宝容易生病不用怕，我来支招。", "取个名字", "532"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "https://1gr.cz/fotky/idnes/09/104/cl5/MCE2ecb31_shutterstock_23472034.jpg",
+        "嫌宝宝太笨？不，是你没用对方法。", "三三两两", "35"));
+    mainPageFragmentListBeans.add(new MainPageFragmentListBean(
+        "https://avatars.mds.yandex.net/get-pdb/34158/426e4077-628f-4ac0-b0ed-1c3134180c3c/s800",
+        "葛大爷手把手教授让宝宝学会自己上厕所。", "葛大爷", "278"));
+    mainPageFragmentListBeans.add(
+        new MainPageFragmentListBean("http://img1.iyiou.com/Cover/2015-04-07/552338cb710a0.jpg",
+            "出门遛狗你必须要知道的几点。", "李爱琴", "137"));
+  }
+
+  private void initChongQuanData() {
+    chongQuanBeans.clear();
+    chongQuanBeans.add(
+        new ChongQuanBean(R.mipmap.cl_chongquan_01, "巴豆霸霸", "2017.08.04", R.mipmap.cl_chongquan_01,
+            "哇，你竟然敢咬我，等我把手拿出来给你点颜色看看！", 90, 56, true));
+    chongQuanBeans.add(
+        new ChongQuanBean(R.mipmap.cl_chongquan_02, "我是仙女", "2017.10.23", R.mipmap.cl_chongquan_02,
+            "喝水的杯子竟然被你当作游乐场，哎，谁叫你是我的小心肝儿呢。", 560, 498, true));
+    chongQuanBeans.add(
+        new ChongQuanBean(R.mipmap.cl_chongquan_03, "宠乐佳佳", "2017.11.14", R.mipmap.cl_chongquan_03,
+            "请忽略这个标记，没错，我就是当警犬养的，我们家的欧巴。", 399, 370, true));
+    chongQuanBeans.add(
+        new ChongQuanBean(R.mipmap.cl_chongquan_04, "我叫不帅", "2018.03.17", R.mipmap.cl_chongquan_04,
+            "当了妈妈之后才知道生孩子的辛苦，辛苦了，我的小宝贝儿。", 875, 679, true));
+  }
+
   private void initKePuView() {
-    kePuAdapter = new StoreFragmentAdapter(activity, new ArrayList<StoreHotRecommendBean>());
+    kePuAdapter = new MainPageFragmentAdapter(activity, new ArrayList<MainPageFragmentListBean>());
 
     recyclerKePu.setHasFixedSize(true);
     recyclerKePu.setLayoutManager(new LinearLayoutManager(getActivity()));
     recyclerKePu.setAdapter(kePuAdapter);
 
-    kePuAdapter.addAll(storeHotRecommendBeans);
-    kePuAdapter.setStoreFragmentAdapterCallBack(
-        new StoreFragmentAdapter.StoreFragmentAdapterCallBack() {
+    kePuAdapter.addAll(mainPageFragmentListBeans);
+    kePuAdapter.setMainPageFragmentAdapterCallBack(
+        new MainPageFragmentAdapter.MainPageFragmentAdapterCallBack() {
           @Override public void onClick(int position) {
+
           }
         });
   }
 
   private void initChongQuanView() {
-    chongQuanAdapter = new StoreFragmentAdapter(activity, new ArrayList<StoreHotRecommendBean>());
+    chongQuanAdapter = new ChongQuanAdapter(activity, new ArrayList<ChongQuanBean>());
 
     View headerView = LayoutInflater.from(getActivity())
         .inflate(R.layout.layout_header_fragment_look_chong_quan,
             recyclerChongQuan.getHeaderContainer(), false);
-
-    ImageView imgChongQuanTitle = headerView.findViewById(R.id.img_fragment_look_chong_quan_title);
-
-    Glide.with(getActivity())
-        .load(
-            "https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=78bde825a586c9171c0e5a6ba8541baa/63d9f2d3572c11df449bb3fe612762d0f603c2a1.jpg")
-        .error(R.mipmap.ic_launcher)
-        .into(imgChongQuanTitle);
 
     recyclerChongQuan.setHasFixedSize(true);
     recyclerChongQuan.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -122,13 +144,7 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
 
     recyclerChongQuan.addHeaderView(headerView);
 
-    chongQuanAdapter.addAll(storeHotRecommendBeans);
-
-    chongQuanAdapter.setStoreFragmentAdapterCallBack(
-        new StoreFragmentAdapter.StoreFragmentAdapterCallBack() {
-          @Override public void onClick(int position) {
-          }
-        });
+    chongQuanAdapter.addAll(chongQuanBeans);
   }
 
   public void setTitleType(final String type) {
