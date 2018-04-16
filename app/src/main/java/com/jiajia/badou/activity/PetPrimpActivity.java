@@ -11,6 +11,7 @@ import com.jiajia.badou.R;
 import com.jiajia.badou.adapter.PetPrimpAdapter;
 import com.jiajia.badou.bean.PetPrimpBean;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.primp.PetPrimpMvpView;
 import com.jiajia.presenter.modle.primp.PetPrimpPresenter;
 import java.util.ArrayList;
@@ -43,8 +44,11 @@ public class PetPrimpActivity extends BaseActivity<PetPrimpPresenter> implements
   }
 
   @Override protected void init() {
-    setPresenter(new PetPrimpPresenter());
     initListView();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new PetPrimpPresenter();
   }
 
   private void initListView() {

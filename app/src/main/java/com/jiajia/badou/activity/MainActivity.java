@@ -26,6 +26,7 @@ import com.jiajia.badou.fragment.StoreFragment;
 import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.util.GPSUtil;
 import com.jiajia.badou.util.baidu.QtLocationClient;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
 import org.greenrobot.eventbus.Subscribe;
@@ -104,6 +105,10 @@ public class MainActivity extends BaseActivity {
   @Override protected void init() {
     ActManager.getAppManager().add(this);
     initView();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   private void initView() {

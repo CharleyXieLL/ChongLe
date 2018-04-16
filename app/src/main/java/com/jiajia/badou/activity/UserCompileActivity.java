@@ -23,6 +23,7 @@ import com.jiajia.badou.view.CommonPopWindow;
 import com.jiajia.badou.view.ExitView;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.ChongLeConfig;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
@@ -62,6 +63,10 @@ public class UserCompileActivity extends TakePhotoActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   @Override protected int onCreateViewTitle() {

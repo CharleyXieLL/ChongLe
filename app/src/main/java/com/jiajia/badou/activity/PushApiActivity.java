@@ -3,6 +3,7 @@ package com.jiajia.badou.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.jiajia.badou.bean.PushBean;
+import com.jiajia.presenter.impl.Presenter;
 
 /**
  * Created by Lei on 2018/1/9.
@@ -34,6 +35,10 @@ public class PushApiActivity extends BaseActivity {
 
   @Override protected void init() {
 
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   @Override public void getFailed(String msg, String code) {

@@ -31,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.jiajia.badou.R;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.ProgressWebChromeClient;
 import com.jiajia.presenter.util.StatusBarUtils;
 import com.jiajia.presenter.util.Strings;
@@ -86,6 +87,10 @@ public class CommonWebViewActivity extends BaseActivity {
     initData();
     initWebView();
     setStatusBar();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   @Override protected void onResume() {

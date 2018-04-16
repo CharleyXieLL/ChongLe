@@ -18,4 +18,5 @@ public class LoginSuccessBean {
   @SerializedName("user_password") String user_password;
   @SerializedName("user_name") String user_name;
   @SerializedName("id") long id;
+
 }

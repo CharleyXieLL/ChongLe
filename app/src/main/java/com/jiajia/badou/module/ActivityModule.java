@@ -7,11 +7,11 @@ import dagger.Module;
  * Created by Lei on 2018/3/2.
  */
 @Module
-public class ActivityMoudle {
+public class ActivityModule {
 
   private LoginActivity loginActivity;
 
-  public ActivityMoudle(LoginActivity loginActivity) {
+  public ActivityModule(LoginActivity loginActivity) {
     this.loginActivity = loginActivity;
   }
 }

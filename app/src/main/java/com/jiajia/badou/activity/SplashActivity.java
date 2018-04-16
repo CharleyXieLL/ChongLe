@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.BaseSharedDataUtil;
+import com.jiajia.presenter.impl.Presenter;
 
 /**
  * Created by Lei on 2018/2/28.
@@ -52,6 +53,10 @@ public class SplashActivity extends BaseActivity {
         finish();
       }
     }, 4000);
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   @Override protected void onDestroy() {

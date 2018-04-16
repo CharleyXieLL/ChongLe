@@ -39,12 +39,13 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
     super.onCreate(savedInstanceState);
     setContentView(onCreateViewId());
     ButterKnife.bind(this);
-    setStatusBar();
+    setPresenter((P) returnPresenter());
     activity = this;
     bus = EventBus.getDefault();
-    init();
+    setStatusBar();
     returnBack();
     setTitleString();
+    init();
   }
 
   private void setTitleString() {
@@ -70,6 +71,8 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
   protected abstract @LayoutRes int onCreateViewId();
 
   protected abstract void init();
+
+  protected abstract Presenter returnPresenter();
 
   private LoadingProgress loadingProgress = null;
 
@@ -139,6 +142,9 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
   }
 
   public void setPresenter(P presenter) {
+    if (presenter == null) {
+      return;
+    }
     if (this.presenter == null) {
       this.presenter = presenter;
       presenter.attachActivity(this);

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.InputType;
@@ -26,6 +25,7 @@ import com.jiajia.badou.util.EditTextUtil;
 import com.jiajia.badou.util.InterfaceUtil;
 import com.jiajia.badou.view.ExitView;
 import com.jiajia.presenter.bean.login.LoginSuccessBean;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.login.LoginMvpView;
 import com.jiajia.presenter.modle.login.LoginPresenter;
 import com.jiajia.presenter.util.StatusBarUtils;
@@ -73,11 +73,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     return intent;
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setPresenter(new LoginPresenter());
-  }
-
   @Override protected int onCreateViewTitleId() {
     return 0;
   }
@@ -91,6 +86,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     initEditText();
     initIntentData();
     initBroadcastReceiver();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new LoginPresenter();
   }
 
   private void initBroadcastReceiver() {
@@ -207,6 +206,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         break;
     }
   }
+
 
   @Override protected void onDestroy() {
     super.onDestroy();

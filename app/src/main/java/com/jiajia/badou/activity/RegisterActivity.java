@@ -23,6 +23,7 @@ import com.jiajia.badou.R;
 import com.jiajia.badou.util.EditTextUtil;
 import com.jiajia.badou.util.GetVerifyCodeTimerUtil;
 import com.jiajia.badou.view.MessageView;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.login.RegisterMvpView;
 import com.jiajia.presenter.modle.login.RegisterPresenter;
 import com.jiajia.presenter.util.StatusBarUtils;
@@ -88,6 +89,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     initGetVerifyCodeTimeUtil();
     initEditText();
     initIntentData();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new RegisterPresenter();
   }
 
   private void initIntentData() {

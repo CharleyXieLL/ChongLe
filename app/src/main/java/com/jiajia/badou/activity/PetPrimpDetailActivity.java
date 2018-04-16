@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
 import com.jiajia.badou.view.GlideImageLoader;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.primp.PetPrimpDetailMvpView;
 import com.jiajia.presenter.modle.primp.PetPrimpDetailPresenter;
 import com.jiajia.presenter.util.ToastUtil;
@@ -58,6 +59,10 @@ public class PetPrimpDetailActivity extends BaseActivity<PetPrimpDetailPresenter
   @Override protected void init() {
     initBanner();
     initBar();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new PetPrimpDetailPresenter();
   }
 
   private void initBar() {

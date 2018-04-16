@@ -23,6 +23,7 @@ import com.allen.library.SuperTextView;
 import com.jiajia.badou.R;
 import com.jiajia.badou.util.EditTextUtil;
 import com.jiajia.badou.util.GetVerifyCodeTimerUtil;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.login.ForgetPasswordMvpView;
 import com.jiajia.presenter.modle.login.ForgetPasswordPresenter;
 import com.jiajia.presenter.util.StatusBarUtils;
@@ -84,6 +85,10 @@ public class ResetLoginPasswordActivity extends BaseActivity<ForgetPasswordPrese
     initGetVerifyCodeTimeUtil();
     initEditText();
     initIntentData();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new ForgetPasswordPresenter();
   }
 
   private void initIntentData() {

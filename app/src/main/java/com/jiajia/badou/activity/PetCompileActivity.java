@@ -22,6 +22,7 @@ import com.jiajia.badou.view.ReportLendPeopleDialog;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
 import com.jiajia.badou.view.wheelview.CalendarView;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.util.ChongLeConfig;
 import com.jiajia.presenter.util.Strings;
 import com.jiajia.presenter.util.ToastUtil;
@@ -70,6 +71,10 @@ public class PetCompileActivity extends TakePhotoActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ActManager.getAppManager().add(this);
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return null;
   }
 
   @Override protected int onCreateViewTitle() {
