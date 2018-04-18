@@ -1,18 +1,21 @@
 apply plugin: 'com.android.application'
 
-android {
-  compileSdkVersion 26
-  defaultConfig {
-    applicationId "com.jiajia.badou"
-    minSdkVersion 16
-    targetSdkVersion 26
-    versionCode 1
-    versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+def STRING = "String"
+def BOOLEAN = "boolean"
+def LONG = "long"
 
-    manifestPlaceholders = [JPUSH_PKGNAME: applicationId,
-                            JPUSH_APPKEY : "ba7dadaad97e2bb4b1c6fdf1",
-                            JPUSH_CHANNEL: "jiajia",]
+android {
+  def globalConfiguration = rootProject.ext
+
+  compileSdkVersion globalConfiguration.androidCompileSdkVersion
+  buildToolsVersion globalConfiguration.androidBuildToolsVersion
+
+  defaultConfig {
+    minSdkVersion globalConfiguration.androidMinSdkVersion
+    targetSdkVersion globalConfiguration.androidTargetSdkVersion
+
+    testInstrumentationRunner globalConfiguration.testInstrumentationRunner
+    testApplicationId globalConfiguration.testApplicationId
 
     ndk { abiFilters "armeabi-v7a" }
 
@@ -24,10 +27,114 @@ android {
   }
 
   buildTypes {
-    release {
+    def defaultProguardRule = getDefaultProguardFile('proguard-android.txt')
+    def proguardKeepLogRule = '../buildsystem/proguard/proguard-rules-base.pro'
+    debug {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      shrinkResources false
     }
+    release {
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles defaultProguardRule, proguardKeepLogRule
+    }
+  }
+
+  flavorDimensions globalConfiguration.androidDemension
+
+  productFlavors {
+    chongLe {
+      dimension globalConfiguration.androidDemension
+      applicationId globalConfiguration.choneLeApplicationId
+      versionCode globalConfiguration.choneLeVersionCode
+      versionName globalConfiguration.choneLeVersionName
+    }
+    jiajia {
+      dimension globalConfiguration.androidDemension
+      applicationId globalConfiguration.jiaJiaApplicationId
+      versionCode globalConfiguration.jiaJiaVersionCode
+      versionName globalConfiguration.jiaJiaVersionName
+    }
+  }
+
+  applicationVariants.all { variant ->
+    def mergedFlavor = variant.mergedFlavor
+    if (variant.productFlavors.get(0).name == "chongLe") {
+      if (variant.buildType.name == "release") {
+        mergedFlavor.manifestPlaceholders = [JPUSH_PKGNAME: "com.jiajia.badou",
+                                             JPUSH_APPKEY : "ba7dadaad97e2bb4b1c6fdf1",
+                                             JPUSH_CHANNEL: "jiajia",
+                                             APP_NAME     : "宠乐"]
+      }
+      if (variant.buildType.name == "debug") {
+        mergedFlavor.manifestPlaceholders = [JPUSH_PKGNAME: "com.jiajia.badou",
+                                             JPUSH_APPKEY : "ba7dadaad97e2bb4b1c6fdf1",
+                                             JPUSH_CHANNEL: "jiajia",
+                                             APP_NAME     : "宠乐测试"]
+      }
+    }
+    if (variant.productFlavors.get(0).name == "jiajia") {
+      if (variant.buildType.name == "release") {
+        mergedFlavor.manifestPlaceholders = [JPUSH_PKGNAME: "com.jiajia.badou",
+                                             JPUSH_APPKEY : "ba7dadaad97e2bb4b1c6fdf1",
+                                             JPUSH_CHANNEL: "jiajia",
+                                             APP_NAME     : "佳佳"]
+      }
+      if (variant.buildType.name == "debug") {
+        mergedFlavor.manifestPlaceholders = [JPUSH_PKGNAME: "com.jiajia.badou",
+                                             JPUSH_APPKEY : "ba7dadaad97e2bb4b1c6fdf1",
+                                             JPUSH_CHANNEL: "jiajia",
+                                             APP_NAME     : "佳佳测试版"]
+      }
+    }
+
+    variant.outputs.all { output ->
+      def outputFile = output.outputFile
+      if (outputFile != null && outputFile.name.endsWith('.apk')) {
+        def fileName = outputFile.name.replaceAll("app",
+            "app_v${productFlavors.versionName}_${releaseTime()}").
+            replaceAll("[\\[\\]]", "").
+            replaceAll("-", "_")
+        outputFileName = fileName
+      }
+    }
+  }
+
+  sourceSets {
+    main {
+      // @formatter:off
+      res.srcDirs = [
+                     'src/main/res']
+      // @formatter:on
+    }
+    choneLeRelease {
+      // @formatter:off
+      res.srcDirs = [
+                     'src/choneLeRelease/res']
+      // @formatter:on
+    }
+    chongLeDebug {
+      // @formatter:off
+      res.srcDirs = [
+                     'src/chongLeDebug/res']
+      // @formatter:on
+    }
+    jiajiaDebug {
+      // @formatter:off
+      res.srcDirs = [
+                     'src/jiajiaDebug/res']
+      // @formatter:on
+    }
+    jiajiaRelease {
+      // @formatter:off
+      res.srcDirs = [
+                     'src/jiajiaRelease/res']
+      // @formatter:on
+    }
+  }
+
+  aaptOptions {
+    cruncherEnabled = false
   }
 }
 
@@ -36,6 +143,12 @@ repositories {
   maven {
     url 'https://maven.google.com'
   }
+}
+
+def static releaseTime() {
+  //  return new Date().format("yyyy-MM-dd_HH:mm:ss", TimeZone.getTimeZone("UTC"))
+  //  return new Date().format("yyyy-MM-dd_HH:mm:ss", TimeZone.getTimeZone("Asia/Shanghai"))
+  return new Date().format("yyyy-MM-dd_HH-mm", TimeZone.getTimeZone("Asia/Shanghai"))
 }
 
 dependencies {

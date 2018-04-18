@@ -1,0 +1,29 @@
+allprojects {
+  repositories {
+    jcenter()
+    maven {
+      url "https://jitpack.io"
+    }
+  }
+}
+
+ext {
+  //Android
+  androidCompileSdkVersion = 26
+  androidBuildToolsVersion = "26.0.2"
+  androidMinSdkVersion = 16
+  androidTargetSdkVersion = 17
+
+  choneLeVersionCode = 1
+  choneLeVersionName = "1.0.0"
+  choneLeApplicationId = "com.jiajia.badou"
+
+  jiaJiaVersionCode = 1
+  jiaJiaVersionName = "1.0.0"
+  jiaJiaApplicationId = "com.jiajia.badou"
+
+  androidDemension = "chongLe"
+
+  testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+  testApplicationId = "com.jiajia.badou.test"
+}
