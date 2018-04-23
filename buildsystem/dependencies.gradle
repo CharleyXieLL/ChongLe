@@ -9,10 +9,10 @@ allprojects {
 
 ext {
   //Android
-  androidCompileSdkVersion = 26
-  androidBuildToolsVersion = "26.0.2"
+  androidCompileSdkVersion = 27
+  androidBuildToolsVersion = "27.0.3"
   androidMinSdkVersion = 16
-  androidTargetSdkVersion = 17
+  androidTargetSdkVersion = 27
 
   choneLeVersionCode = 1
   choneLeVersionName = "1.0.0"

@@ -6,7 +6,7 @@ package com.jiajia.presenter.net;
  */
 public class HttpUtil {
 
-  private static String BASE_URL = "http://dongceha.oicp.io/";
+  private static String BASE_URL = "http://dongceha.oicp.io:42440/";
 
   /**
    * 用户注册
