@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+  <include layout="@layout/yq_base_title"/>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      />
+  <TextView
+      android:id="@+id/tv_select_all_order_no_data"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="180dp"
+      android:gravity="center_horizontal"
+      android:text="暂无订单"
+      android:textColor="@color/yq_text_color_blank"
+      android:textSize="@dimen/yq_body"
+      android:visibility="gone"
+      />
+</LinearLayout>

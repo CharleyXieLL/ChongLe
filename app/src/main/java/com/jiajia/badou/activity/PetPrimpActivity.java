@@ -1,16 +1,20 @@
 package com.jiajia.badou.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
 import com.jiajia.badou.adapter.PetPrimpAdapter;
-import com.jiajia.badou.bean.PetPrimpBean;
+import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
+import com.jiajia.presenter.bean.PetPrimpBean;
 import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.primp.PetPrimpMvpView;
 import com.jiajia.presenter.modle.primp.PetPrimpPresenter;
@@ -23,16 +27,28 @@ import java.util.List;
  */
 public class PetPrimpActivity extends BaseActivity<PetPrimpPresenter> implements PetPrimpMvpView {
 
+  private static final String FROM = "from";
+
   @BindView(R.id.relat_pet_primp_address_type) RelativeLayout relatAddressType;
   @BindView(R.id.relat_pet_primp_intelligent_sort) RelativeLayout relatIntelligentSort;
   @BindView(R.id.recycler_pet_primp) HeaderAndFooterRecyclerView recyclerView;
+  @BindView(R.id.api_base_title) TextView apiBaseTitle;
 
   private List<PetPrimpBean> petPrimpBeans = new ArrayList<>();
 
   private PetPrimpAdapter petPrimpAdapter;
 
-  public static Intent callIntent(Context context) {
-    return new Intent(context, PetPrimpActivity.class);
+  private String from;
+
+  public static Intent callIntent(Context context, String type) {
+    Intent intent = new Intent(context, PetPrimpActivity.class);
+    intent.putExtra(FROM, type);
+    return intent;
+  }
+
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ActManager.getAppManager().add(this);
   }
 
   @Override protected int onCreateViewTitleId() {
@@ -44,6 +60,12 @@ public class PetPrimpActivity extends BaseActivity<PetPrimpPresenter> implements
   }
 
   @Override protected void init() {
+    getIntentData();
+  }
+
+  @SuppressLint("SetTextI18n") private void getIntentData() {
+    from = getIntent().getStringExtra(FROM);
+    apiBaseTitle.setText("宠物" + from);
     initListView();
   }
 
@@ -52,28 +74,21 @@ public class PetPrimpActivity extends BaseActivity<PetPrimpPresenter> implements
   }
 
   private void initListView() {
-    petPrimpAdapter = new PetPrimpAdapter(activity, new ArrayList<PetPrimpBean>());
+    petPrimpAdapter = new PetPrimpAdapter(activity, new ArrayList<PetPrimpBean>(), from);
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+
     recyclerView.setAdapter(petPrimpAdapter);
 
     petPrimpAdapter.setPetPrimpAdapterCallBack(new PetPrimpAdapter.PetPrimpAdapterCallBack() {
       @Override public void onClick(int position) {
-        startActivity(PetPrimpDetailActivity.callIntent(activity));
+        startActivity(
+            PetPrimpDetailActivity.callIntent(activity, from, petPrimpBeans.get(position)));
       }
     });
 
-    getData();
-  }
-
-  private void getData() {
-    petPrimpBeans.clear();
-    for (int i = 0; i < 10; i++) {
-      PetPrimpBean petPrimpBean =
-          new PetPrimpBean("", "宠乐宠物美容中心", "杭州市西湖区紫霞街80号", "西湖区", "13897362748", "1.8km");
-      petPrimpBeans.add(petPrimpBean);
-    }
-    petPrimpAdapter.addAll(petPrimpBeans);
+    showLoadingDialog("");
+    getPresenter().selectAllStoreMess();
   }
 
   @Override public void getFailed(String msg, String code) {
@@ -89,5 +104,18 @@ public class PetPrimpActivity extends BaseActivity<PetPrimpPresenter> implements
       case R.id.relat_pet_primp_intelligent_sort:
         break;
     }
+  }
+
+  @Override public void selectAllStoreMess(List<PetPrimpBean> petPrimpBeans) {
+    dismissLoadingDialog();
+    this.petPrimpBeans.clear();
+    this.petPrimpBeans.addAll(petPrimpBeans);
+    petPrimpAdapter.clear();
+    petPrimpAdapter.addAll(petPrimpBeans);
+  }
+
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    ActManager.getAppManager().remove(this);
   }
 }

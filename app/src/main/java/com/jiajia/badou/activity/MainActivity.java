@@ -17,6 +17,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
+import com.jiajia.badou.bean.event.EventActionUtil;
+import com.jiajia.badou.bean.event.EventBusAction;
 import com.jiajia.badou.bean.event.JumpStoreEvent;
 import com.jiajia.badou.fragment.BaseFragment;
 import com.jiajia.badou.fragment.LookFragment;
@@ -211,7 +213,6 @@ public class MainActivity extends BaseActivity {
   @Override protected void onStop() {
     mStateSaved = true;
     super.onStop();
-    bus.unregister(this);
   }
 
   @Override protected void onPause() {
@@ -221,7 +222,9 @@ public class MainActivity extends BaseActivity {
 
   @Override protected void onStart() {
     super.onStart();
-    bus.register(this);
+    if (!bus.isRegistered(this)) {
+      bus.register(this);
+    }
   }
 
   @Override protected void onDestroy() {
@@ -229,6 +232,9 @@ public class MainActivity extends BaseActivity {
     ActManager.getAppManager().remove(this);
     if (gpsUtil != null) {
       gpsUtil.onDestroy();
+    }
+    if (bus.isRegistered(this)) {
+      bus.unregister(this);
     }
     LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverShowLoading);
@@ -385,5 +391,18 @@ public class MainActivity extends BaseActivity {
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void onJumpStoreFragmentEvent(JumpStoreEvent event) {
     switchFragment(STORE_FRAGMENT);
+  }
+
+  @Subscribe public void onEventAction(EventBusAction event) {
+    String action = event.getAction();
+    if (!Strings.isNullOrEmpty(action)) {
+      switch (action) {
+        case EventActionUtil.REFRESH_MINE_DATA:
+          if (mineFragment != null) {
+            mineFragment.getPet();
+          }
+          break;
+      }
+    }
   }
 }

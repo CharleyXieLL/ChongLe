@@ -99,6 +99,20 @@
         android:background="@color/yq_c_bg"
         />
 
+    <com.jiajia.badou.view.UserCenterItemView
+        android:id="@+id/mine_order_bill"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:arrow_visiable="true"
+        app:arrowimgid="@mipmap/yj_arrow_left"
+        app:bottomline_visiable="true"
+        app:corner_titles="我的订单"
+        app:imgid="@mipmap/ycjt_mine_bank"
+        app:left_text_visiable="false"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -113,14 +127,15 @@
           />
 
       <TextView
-          android:id="@+id/tv_mine_fragment_my_pet_reset"
+          android:id="@+id/tv_mine_fragment_my_pet_add"
           android:layout_width="60dp"
           android:layout_height="50dp"
           android:layout_alignParentRight="true"
           android:gravity="bottom|right"
-          android:text="编辑"
+          android:text="添加宠物"
           android:textColor="@color/main_check_true"
           android:textSize="14sp"
+          android:visibility="gone"
           style="@style/yq_text_black"
           />
     </RelativeLayout>
@@ -130,7 +145,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         />
+
+    <RelativeLayout
+        android:id="@+id/relat_mine_add_pet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+      <ImageView
+          android:id="@+id/img_mine_add_pet"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="40dp"
+          android:background="@mipmap/main_button_add"
+          />
+    </RelativeLayout>
 
   </LinearLayout>
 </LinearLayout>

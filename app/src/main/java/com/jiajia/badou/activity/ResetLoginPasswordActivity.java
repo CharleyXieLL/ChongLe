@@ -80,7 +80,6 @@ public class ResetLoginPasswordActivity extends BaseActivity<ForgetPasswordPrese
   }
 
   @Override protected void init() {
-    setPresenter(new ForgetPasswordPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();

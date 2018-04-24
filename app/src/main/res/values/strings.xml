@@ -1,6 +1,8 @@
 <resources>
   <string name="app_name">宠乐</string>
 
+  <string name="cl_title_select_all_order">预约订单</string>
+
   <string name="yq_pop_authorization_title">授权提醒</string>
   <string name="yq_pop_authorization_tips">申请借款，需要同意“宠乐”访问您的通讯录及地理位置,请打开您的相关权限后才能完成借款</string>
   <string name="yq_pop_authorization_contacts_tips">申请借款，需要同意“宠乐”访问您的通讯录,请打开您的相关权限后才能完成借款</string>
@@ -24,6 +26,39 @@
   <string-array name="gender">
     <item>男</item>
     <item>女</item>
+  </string-array>
+
+  <string-array name="kepu_url">
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5099</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5098</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5097</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5094</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5093</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5092</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5085</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5084</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5081</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5079</item>
+    <item>http://www.zgcwdy.com/index.php?s=/articles/5077</item>
+  </string-array>
+
+  <string-array name="time_hour">
+    <item>08:00</item>
+    <item>09:00</item>
+    <item>10:00</item>
+    <item>11:00</item>
+    <item>12:00</item>
+    <item>13:00</item>
+    <item>14:00</item>
+    <item>15:00</item>
+    <item>16:00</item>
+    <item>17:00</item>
+    <item>18:00</item>
+    <item>19:00</item>
+    <item>20:00</item>
+    <item>21:00</item>
+    <item>22:00</item>
+    <item>23:00</item>
   </string-array>
 
 </resources>

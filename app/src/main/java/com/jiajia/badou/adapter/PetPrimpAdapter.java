@@ -12,8 +12,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.allen.library.SuperTextView;
+import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
-import com.jiajia.badou.bean.PetPrimpBean;
+import com.jiajia.presenter.bean.PetPrimpBean;
 import java.util.List;
 
 /**
@@ -21,13 +22,21 @@ import java.util.List;
  */
 public class PetPrimpAdapter extends RecyclerView.Adapter<PetPrimpAdapter.ViewHolder> {
 
+  public final static String MEI_RONG = "美容";
+  public final static String YI_LIAO = "医疗";
+  public final static String JI_YANG = "托管";
+
   private List<PetPrimpBean> mDatas;
   private LayoutInflater mInflater;
   private Context context;
+  private String type;
 
-  public PetPrimpAdapter(Context mContext, List<PetPrimpBean> mDatas) {
+  private int[] imgs = new int[] { R.mipmap.c_001, R.mipmap.c_002, R.mipmap.c_003, R.mipmap.c_004 };
+
+  public PetPrimpAdapter(Context mContext, List<PetPrimpBean> mDatas, String type) {
     this.context = mContext;
     this.mDatas = mDatas;
+    this.type = type;
     mInflater = LayoutInflater.from(mContext);
   }
 
@@ -47,13 +56,27 @@ public class PetPrimpAdapter extends RecyclerView.Adapter<PetPrimpAdapter.ViewHo
   @SuppressLint("SetTextI18n") @Override public void onBindViewHolder(ViewHolder holder,
       @SuppressLint("RecyclerView") final int position) {
     PetPrimpBean petPrimpBean = mDatas.get(position);
-    //Glide.with(context).load(R.mipmap.ic_launcher).into(holder.img);
-    holder.tvAddress.setText(petPrimpBean.getAddress1());
-    holder.tvAddress2.setText(petPrimpBean.getAddress2());
-    holder.tvTitle.setText(petPrimpBean.getTitle());
-    holder.tvDistance.setText(petPrimpBean.getDistance());
-    holder.tvPhone.setText(petPrimpBean.getPhone());
-    holder.layoutContent.setOnClickListener(new View.OnClickListener() {
+    if (position < imgs.length) {
+      Glide.with(context).load(imgs[position]).into(holder.img);
+    } else {
+      Glide.with(context).load(R.mipmap.c_004).into(holder.img);
+    }
+    holder.tvAddress.setText(petPrimpBean.getLocation());
+    holder.tvAddress2.setText(petPrimpBean.getStore());
+    String typeString = null;
+    if (type.equals(MEI_RONG)) {
+      typeString = "美容中心";
+    }
+    if (type.equals(JI_YANG)) {
+      typeString = "寄养中心";
+    }
+    if (type.equals(YI_LIAO)) {
+      typeString = "医疗中心";
+    }
+    holder.tvTitle.setText(petPrimpBean.getLocation() + typeString);
+    holder.tvDistance.setText("2.2km");
+    holder.tvPhone.setText(petPrimpBean.getQq());
+    holder.superTvSubmit.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         petPrimpAdapterCallBack.onClick(position);
       }

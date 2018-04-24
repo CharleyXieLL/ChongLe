@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/yj_pressed"
+    >
+
+  <RelativeLayout
+      android:id="@+id/relat"
+      android:layout_width="34dp"
+      android:layout_height="34dp"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="20dp"
+      >
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/yq_logo_zhima"
+        />
+  </RelativeLayout>
+
+  <TextView
+      android:id="@+id/tv_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="15dp"
+      android:layout_toRightOf="@+id/relat"
+      android:text="芝麻授信"
+      android:textColor="@color/yq_text_color_blank"
+      android:textSize="@dimen/yq_title"
+      />
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="20dp"
+      android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_left"
+        android:textSize="@dimen/yq_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/yq_text_color_blank"
+        tools:text="600"
+        />
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:background="@mipmap/yj_arrow_left"
+        />
+  </LinearLayout>
+
+
+  <View
+      android:layout_alignParentBottom="true"
+      android:layout_marginLeft="24dp"
+      style="@style/yq_line_style"
+      android:id="@+id/line"
+      />
+
+</RelativeLayout>

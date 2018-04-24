@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/layout_item_select_pet_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="5dp"
+    >
+
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="100dp"
+      android:layout_gravity="center_horizontal"
+      >
+    <ImageView
+        android:id="@+id/img_item_primp_select_pet"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:background="@mipmap/c_001"
+        />
+
+    <ImageView
+        android:id="@+id/img_item_primp_select_pet_check_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@mipmap/yes_main_check_true"
+        android:visibility="gone"
+        />
+  </RelativeLayout>
+
+  <TextView
+      android:id="@+id/tv_item_primp_select_pet_name"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="5dp"
+      android:textSize="@dimen/yq_body"
+      tools:text="八斗"
+      style="@style/yq_text_black"
+      />
+
+</LinearLayout>

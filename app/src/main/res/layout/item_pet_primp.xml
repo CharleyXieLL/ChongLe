@@ -14,27 +14,26 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:padding="16dp"
+      android:padding="10dp"
       >
 
     <ImageView
         android:id="@+id/img_item_pet_primp"
         android:layout_width="110dp"
         android:layout_height="80dp"
-        android:background="@mipmap/ic_launcher"
         />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:orientation="vertical"
         >
 
       <TextView
           android:id="@+id/tv_item_pet_primp_title"
-          android:textSize="@dimen/yq_headline"
+          android:textSize="@dimen/yq_title"
           tools:text="宠乐宠物中心"
           style="@style/yq_text_black"
           />
@@ -44,7 +43,7 @@
           android:layout_marginTop="7dp"
           android:drawableLeft="@mipmap/address"
           android:drawablePadding="10dp"
-          android:textSize="@dimen/yq_body"
+          android:textSize="13sp"
           tools:text="杭州市西湖区222号"
           style="@style/yq_text_black"
           />
@@ -56,14 +55,14 @@
           >
         <TextView
             android:id="@+id/tv_item_pet_primp_address2"
-            android:textSize="@dimen/yq_body"
+            android:textSize="@dimen/yq_caption"
             tools:text="西湖区"
             style="@style/yq_text_black"
             />
         <TextView
             android:id="@+id/tv_item_pet_primp_distance"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/yq_body"
+            android:textSize="@dimen/yq_caption"
             tools:text="1.1km"
             style="@style/yq_text_black"
             />
@@ -96,6 +95,7 @@
               android:id="@+id/tv_item_pet_primp_phone"
               android:layout_marginLeft="10dp"
               android:gravity="center"
+              android:textSize="@dimen/yq_caption"
               tools:text="13928738492"
               style="@style/yq_text_black"
               />
@@ -104,7 +104,7 @@
         <com.allen.library.SuperTextView
             android:id="@+id/super_tv_item_pet_primp_submit"
             android:layout_width="75dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
             app:sCenterTextColor="@color/white"
             app:sCenterTextSize="@dimen/yq_title"

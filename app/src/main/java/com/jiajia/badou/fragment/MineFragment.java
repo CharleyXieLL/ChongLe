@@ -10,6 +10,7 @@ import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.badou.activity.PetCompileActivity;
+import com.jiajia.badou.activity.SelectAllOrderActivity;
 import com.jiajia.badou.activity.UserCompileActivity;
 import com.jiajia.badou.mine.Align;
 import com.jiajia.badou.mine.Config;
@@ -17,10 +18,13 @@ import com.jiajia.badou.mine.StackAdapter;
 import com.jiajia.badou.mine.StackLayoutManager;
 import com.jiajia.badou.util.BaseSharedDataUtil;
 import com.jiajia.badou.view.BigAvatarView;
-import com.jiajia.presenter.modle.main.MineFragmentMvpView;
-import com.jiajia.presenter.modle.main.MineFragmentPresenter;
+import com.jiajia.badou.view.UserCenterItemView;
+import com.jiajia.presenter.bean.mine.SelectPetsByOwnerBean;
+import com.jiajia.presenter.impl.Presenter;
+import com.jiajia.presenter.modle.mine.MineFragmentMvpView;
+import com.jiajia.presenter.modle.mine.MineFragmentPresenter;
 import com.makeramen.roundedimageview.RoundedImageView;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,12 +38,20 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
   @BindView(R.id.img_mine_fragment_avatar) RoundedImageView imgAvatar;
   @BindView(R.id.tv_mine_fragment_my_name) TextView tvMyName;
   @BindView(R.id.tv_mine_fragment_sign) TextView tvSign;
-  @BindView(R.id.tv_mine_fragment_my_pet_reset) TextView tvMyPetReset;
+  @BindView(R.id.tv_mine_fragment_my_pet_add) TextView tvMyPetReset;
   @BindView(R.id.relat_mine_fragment_reset) RelativeLayout relatReset;
+
+  @BindView(R.id.relat_mine_add_pet) RelativeLayout relatAddPet;
+  @BindView(R.id.img_mine_add_pet) ImageView imgAddPet;
+  @BindView(R.id.mine_order_bill) UserCenterItemView mineOrderBill;
 
   @BindView(R.id.recycler_mine_fragment_pet_card) RecyclerView recyclerView;
 
   private BigAvatarView bigAvatarView;
+
+  private StackAdapter adapter;
+
+  private List<SelectPetsByOwnerBean> selectPetsByOwnerBeans = new ArrayList<>();
 
   public static MineFragment newInstance() {
     return new MineFragment();
@@ -52,6 +64,16 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
   @Override protected void init() {
     initUi();
     initBigAvatarView();
+    getData();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new MineFragmentPresenter();
+  }
+
+  private void getData() {
+    getPresenter().selectById();
+    getPresenter().selectPetsByOwner(BaseSharedDataUtil.getUserId(activity));
   }
 
   private void initBigAvatarView() {
@@ -59,12 +81,6 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
   }
 
   private void initUi() {
-    List<String> imageUrls =
-        Arrays.asList("https://s1.1zoom.ru/big0/453/Dogs_Spitz_Winter_hat_471485.jpg",
-            "https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=78bde825a586c9171c0e5a6ba8541baa/63d9f2d3572c11df449bb3fe612762d0f603c2a1.jpg",
-            "http://img02.tooopen.com/Downs/images/2010/9/9/sy_20100909075330671012.jpg",
-            "http://first-vet.bg/wp-content/uploads/2014/09/dogcat23.jpg",
-            "http://www.rainbowbridge-pet.com/index/pics/20170223/201702231487847321740.png");
     Config config = new Config();
     config.secondaryScale = 0.9f;
     config.scaleRatio = 0.4f;
@@ -72,8 +88,8 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
     config.initialStackCount = 0;
     config.space = 15;
     config.align = Align.LEFT;
+
     recyclerView.setLayoutManager(new StackLayoutManager(config));
-    recyclerView.setAdapter(new StackAdapter(imageUrls));
 
     Glide.with(activity)
         .load(BaseSharedDataUtil.getUserAvatar(activity))
@@ -88,19 +104,29 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
         .into(imgAvatar);
   }
 
+  public void getPet() {
+    getPresenter().selectPetsByOwner(BaseSharedDataUtil.getUserId(activity));
+  }
+
   @OnClick({
-      R.id.img_mine_fragment_avatar, R.id.tv_mine_fragment_my_pet_reset,
-      R.id.relat_mine_fragment_reset
+      R.id.img_mine_fragment_avatar, R.id.tv_mine_fragment_my_pet_add,
+      R.id.relat_mine_fragment_reset, R.id.mine_order_bill, R.id.img_mine_add_pet
   }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.img_mine_fragment_avatar:
         bigAvatarView.setUrl("");
         break;
-      case R.id.tv_mine_fragment_my_pet_reset:
+      case R.id.tv_mine_fragment_my_pet_add:
         startActivity(PetCompileActivity.callIntent(getActivity()));
         break;
       case R.id.relat_mine_fragment_reset:
         startActivity(UserCompileActivity.callIntent(getActivity()));
+        break;
+      case R.id.img_mine_add_pet:
+        startActivity(PetCompileActivity.callIntent(getActivity()));
+        break;
+      case R.id.mine_order_bill:
+        startActivity(SelectAllOrderActivity.callIntent(activity));
         break;
       default:
         break;
@@ -110,5 +136,32 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter>
   @Override public void getFailed(String msg, String code) {
     dismissLoadingDialog();
     showToast(msg);
+  }
+
+  @Override
+  public void selectPetsByOwner(final List<SelectPetsByOwnerBean> selectPetsByOwnerBeans) {
+    dismissLoadingDialog();
+    this.selectPetsByOwnerBeans.clear();
+    this.selectPetsByOwnerBeans.addAll(selectPetsByOwnerBeans);
+    if (selectPetsByOwnerBeans.size() > 0) {
+      relatAddPet.setVisibility(View.GONE);
+      recyclerView.setVisibility(View.VISIBLE);
+      tvMyPetReset.setVisibility(View.VISIBLE);
+
+      adapter = new StackAdapter(selectPetsByOwnerBeans);
+
+      recyclerView.setAdapter(adapter);
+
+      adapter.setStackAdapterCallBack(new StackAdapter.StackAdapterCallBack() {
+        @Override public void onStackClick(int position) {
+          startActivity(
+              PetCompileActivity.callIntent(activity, selectPetsByOwnerBeans.get(position)));
+        }
+      });
+    } else {
+      relatAddPet.setVisibility(View.VISIBLE);
+      recyclerView.setVisibility(View.GONE);
+      tvMyPetReset.setVisibility(View.GONE);
+    }
   }
 }

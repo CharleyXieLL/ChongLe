@@ -1,6 +1,7 @@
-package com.jiajia.badou.bean;
+package com.jiajia.presenter.bean;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,18 +14,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 // @formatter:on
-public class PetPrimpBean {
+public class PetPrimpBean implements Serializable{
 
   @SerializedName("img") String img;
 
-  @SerializedName("title") String title;
+  @SerializedName("location") String location;
 
-  @SerializedName("address1") String address1;
+  @SerializedName("store") String store;
 
-  @SerializedName("address2") String address2;
+  @SerializedName("qq") String qq;
 
-  @SerializedName("phone") String phone;
-
-  @SerializedName("distance") String distance;
+  @SerializedName("id") int id;
 
 }

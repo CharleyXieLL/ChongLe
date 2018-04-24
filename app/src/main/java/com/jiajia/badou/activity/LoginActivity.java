@@ -50,7 +50,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   @BindView(R.id.img_login_delete_password) ImageView imgDeletePassword;
   @BindView(R.id.relat_login_show_close_password) RelativeLayout layoutClosePassword;
   @BindView(R.id.img_show_close_password) ImageView imgClosePassword;
-  @BindView(R.id.tv_login_forget_password) TextView tvForgetPassword;
 
   private boolean isShowPassword = false;
 
@@ -155,8 +154,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   }
 
   @OnClick({
-      R.id.super_tv_login_submit, R.id.tv_login_register, R.id.relat_login_show_close_password,
-      R.id.tv_login_forget_password
+      R.id.super_tv_login_submit, R.id.tv_login_register, R.id.relat_login_show_close_password
   }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.super_tv_login_submit:
@@ -198,9 +196,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
           });
           isShowPassword = true;
         }
-        break;
-      case R.id.tv_login_forget_password:
-        startActivity(ResetLoginPasswordActivity.callIntent(LoginActivity.this));
         break;
       default:
         break;

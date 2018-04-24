@@ -29,18 +29,22 @@
       android:id="@+id/tv_base_title_close"
       android:layout_height="match_parent"
       android:layout_toRightOf="@+id/yq_base_back_arrow_iv"
-      tools:text="关闭"
       android:textColor="@color/yq_text_color_blank"
+      tools:text="关闭"
       style="@style/yq_text_98"
       />
 
   <TextView
       android:id="@+id/api_base_title"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
+      android:paddingLeft="60dp"
+      android:paddingRight="60dp"
+      android:ellipsize="end"
       android:gravity="center"
+      android:lines="1"
       android:textColor="@color/yq_text_color_blank"
       android:textSize="18dp"
       android:textStyle="bold"
@@ -54,8 +58,8 @@
       android:layout_alignParentRight="true"
       android:layout_marginRight="20dp"
       android:gravity="center_vertical"
+      android:textColor="@color/main_check_true"
       android:textSize="14sp"
       tools:text="添加宠物"
-      android:textColor="@color/main_check_true"
       />
 </RelativeLayout>

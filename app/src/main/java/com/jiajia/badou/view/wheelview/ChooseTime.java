@@ -287,11 +287,27 @@ public class ChooseTime {
       e.printStackTrace();
     }
 
-    if (setTime > currentTimeDate.getTime()) {
-      isPass = false;
+    if (!Strings.isNullOrEmpty(calendarType)) {
+      if (calendarType.equals(CalendarView.CALENDAR_BIRTHDAY)) {
+        if (setTime > currentTimeDate.getTime()) {
+          isPass = false;
+        }
+      }
+      if (calendarType.equals(CalendarView.CALENDAR_NORMAL_TIME)) {
+        if (setTime > currentTimeDate.getTime()) {
+          isPass = true;
+        }
+      }
+    } else {
+      return true;
     }
-
     return isPass;
+  }
+
+  private String calendarType;
+
+  public void setCalendarType(String type) {
+    this.calendarType = type;
   }
 
   public String getTxt() {

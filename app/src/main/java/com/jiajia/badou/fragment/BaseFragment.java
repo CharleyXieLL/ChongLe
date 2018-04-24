@@ -41,6 +41,7 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+    setPresenter((P) returnPresenter());
     activity = getActivity();
     bus = EventBus.getDefault();
     init();
@@ -72,6 +73,8 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
       throw new RuntimeException("Never call this method manually!!!");
     }
   }
+
+  protected abstract Presenter returnPresenter();
 
   private P presenter;
 

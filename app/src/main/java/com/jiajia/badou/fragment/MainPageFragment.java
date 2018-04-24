@@ -13,10 +13,12 @@ import com.jiajia.badou.R;
 import com.jiajia.badou.activity.CommonWebViewActivity;
 import com.jiajia.badou.activity.PetPrimpActivity;
 import com.jiajia.badou.adapter.MainPageFragmentAdapter;
+import com.jiajia.badou.adapter.PetPrimpAdapter;
 import com.jiajia.badou.bean.event.JumpStoreEvent;
 import com.jiajia.badou.view.GlideImageLoader;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
 import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.main.MainPageFragmentPresenter;
 import com.jiajia.presenter.util.InputMethodUtil;
 import com.jiajia.presenter.util.Strings;
@@ -28,7 +30,6 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Lei on 2018/1/30.
@@ -49,6 +50,7 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
   private Handler handler = new Handler();
 
   private Handler showLocationHandler = new Handler();
+  private List<String> urls = new ArrayList<>();
 
   public static MainPageFragment newInstance() {
     return new MainPageFragment();
@@ -62,6 +64,10 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     initView();
     initInputMethod();
     initEdit();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new MainPageFragmentPresenter();
   }
 
   private void initInputMethod() {
@@ -79,7 +85,7 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
   }
 
   private void initView() {
-    View headerView = LayoutInflater.from(getActivity())
+    View headerView = LayoutInflater.from(activity)
         .inflate(R.layout.layout_header_fragment_main_page, recyclerView.getHeaderContainer(),
             false);
     banner = headerView.findViewById(R.id.fragment_main_page_banner);
@@ -95,6 +101,9 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     recyclerView.setAdapter(adapter);
     recyclerView.addHeaderView(headerView);
 
+    urls.clear();
+    urls = Arrays.asList(getResources().getStringArray(R.array.kepu_url));
+
     initListBean();
   }
 
@@ -106,22 +115,22 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
 
     imgStore.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-        EventBus.getDefault().post(new JumpStoreEvent());
+        bus.post(new JumpStoreEvent());
       }
     });
     imgJiYang.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-
+        activity.startActivity(PetPrimpActivity.callIntent(activity, PetPrimpAdapter.JI_YANG));
       }
     });
     imgMedicalTreatment.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-
+        activity.startActivity(PetPrimpActivity.callIntent(activity, PetPrimpAdapter.YI_LIAO));
       }
     });
     imgPrimp.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-        activity.startActivity(PetPrimpActivity.callIntent(activity));
+        activity.startActivity(PetPrimpActivity.callIntent(activity, PetPrimpAdapter.MEI_RONG));
       }
     });
   }
@@ -156,7 +165,7 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     adapter.setMainPageFragmentAdapterCallBack(
         new MainPageFragmentAdapter.MainPageFragmentAdapterCallBack() {
           @Override public void onClick(int position) {
-
+            startActivity(CommonWebViewActivity.callIntent(getActivity(), urls.get(position)));
           }
         });
 
@@ -172,8 +181,7 @@ public class MainPageFragment extends BaseFragment<MainPageFragmentPresenter> {
     banner.setIndicatorGravity(BannerConfig.RIGHT);
     banner.setOnBannerListener(new OnBannerListener() {
       @Override public void OnBannerClick(int position) {
-        startActivity(CommonWebViewActivity.callIntent(getActivity(),
-            "https://baike.baidu.com/item/%E5%AE%A0%E7%89%A9%E7%8B%97/6677317?fr=aladdin"));
+        startActivity(CommonWebViewActivity.callIntent(getActivity(), urls.get(position)));
       }
     });
 

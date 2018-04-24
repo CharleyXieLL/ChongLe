@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="UserCenterItemView">
+    <attr format="reference" name="imgid"/>
+    <attr format="string" name="corner_titles"/>
+    <attr format="reference" name="arrowimgid"/>
+    <attr format="boolean" name="bottomline_visiable"/>
+    <attr format="string" name="left_text"/>
+    <attr format="boolean" name="arrow_visiable"/>
+    <attr format="boolean" name="left_text_visiable"/>
+  </declare-styleable>
+</resources>

@@ -12,6 +12,7 @@ import com.jiajia.presenter.util.Strings;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import java.io.File;
 
 /**
  * Created by Lei on 2018/3/1.
@@ -56,6 +57,87 @@ public abstract class OkGoHttpAction<D> {
         }
       }
     });
+  }
+
+  public void okGoPost(Context context, final String data, String url, final Class<D> dataTypeClz) {
+    OkGo.<String>post(url).upJson(data).tag(context).execute(new StringCallback() {
+      @Override public void onSuccess(Response<String> response) {
+        if (!Strings.isNullOrEmpty(response.body())) {
+          JsonObject jsonObject = null;
+          try {
+            JsonElement jsonElement = new Gson().fromJson(response.body(), JsonElement.class);
+            if (jsonElement != null) {
+              jsonObject = jsonElement.getAsJsonObject();
+            }
+          } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+          }
+          if (jsonObject != null) {
+            String code = jsonObject.get("code").getAsString();
+            String msg = jsonObject.get("msg").getAsString();
+            try {
+              if (isResponseSuccess(code)) {
+                Result<D> result = PresenterGsonUtil.fromJsonObject(response.body(), dataTypeClz);
+                onResponseCodeSuccess(result, msg, code);
+              } else {
+                onResponseCodeFailed(msg, code);
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          } else {
+            try {
+              onResponseCodeFailed("网络请求错误", "400");
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      }
+    });
+  }
+
+  public void okGoPostFile(Context context, final String data, String url, String filePath,
+      final Class<D> dataTypeClz) {
+    OkGo.<String>post(url).upJson(data)
+        .tag(context)
+        .params("file", new File(filePath))
+        .execute(new StringCallback() {
+          @Override public void onSuccess(Response<String> response) {
+            if (!Strings.isNullOrEmpty(response.body())) {
+              JsonObject jsonObject = null;
+              try {
+                JsonElement jsonElement = new Gson().fromJson(response.body(), JsonElement.class);
+                if (jsonElement != null) {
+                  jsonObject = jsonElement.getAsJsonObject();
+                }
+              } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+              }
+              if (jsonObject != null) {
+                String code = jsonObject.get("code").getAsString();
+                String msg = jsonObject.get("msg").getAsString();
+                try {
+                  if (isResponseSuccess(code)) {
+                    Result<D> result =
+                        PresenterGsonUtil.fromJsonObject(response.body(), dataTypeClz);
+                    onResponseCodeSuccess(result, msg, code);
+                  } else {
+                    onResponseCodeFailed(msg, code);
+                  }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              } else {
+                try {
+                  onResponseCodeFailed("网络请求错误", "400");
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              }
+            }
+          }
+        });
   }
 
   private boolean isResponseSuccess(String code) {

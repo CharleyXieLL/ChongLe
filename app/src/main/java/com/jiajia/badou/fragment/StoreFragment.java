@@ -16,6 +16,7 @@ import com.jiajia.badou.adapter.StoreFragmentHotRecommendAdapter;
 import com.jiajia.badou.bean.main.StoreHotRecommendBean;
 import com.jiajia.badou.view.GlideImageLoader;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.main.StoreFragmentMvpView;
 import com.jiajia.presenter.modle.main.StoreFragmentPresenter;
 import com.jiajia.presenter.util.InputMethodUtil;
@@ -63,6 +64,10 @@ public class StoreFragment extends BaseFragment<StoreFragmentPresenter>
     initView();
     initInputMethod();
     initEdit();
+  }
+
+  @Override protected Presenter returnPresenter() {
+    return new StoreFragmentPresenter();
   }
 
   private void initInputMethod() {
@@ -161,6 +166,7 @@ public class StoreFragment extends BaseFragment<StoreFragmentPresenter>
   }
 
   private void initBanner() {
+    final List<String> urls = Arrays.asList(getResources().getStringArray(R.array.kepu_url));
     banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
     banner.setImageLoader(new GlideImageLoader());
     banner.setBannerAnimation(Transformer.Default);
@@ -169,8 +175,7 @@ public class StoreFragment extends BaseFragment<StoreFragmentPresenter>
     banner.setIndicatorGravity(BannerConfig.RIGHT);
     banner.setOnBannerListener(new OnBannerListener() {
       @Override public void OnBannerClick(int position) {
-        startActivity(CommonWebViewActivity.callIntent(getActivity(),
-            "https://baike.baidu.com/item/%E5%AE%A0%E7%89%A9%E7%8B%97/6677317?fr=aladdin"));
+        startActivity(CommonWebViewActivity.callIntent(getActivity(), urls.get(position)));
       }
     });
     List<String> imageUrls =

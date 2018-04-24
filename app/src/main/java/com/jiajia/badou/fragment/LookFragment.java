@@ -12,16 +12,19 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.jiajia.badou.R;
+import com.jiajia.badou.activity.CommonWebViewActivity;
 import com.jiajia.badou.activity.MainActivity;
 import com.jiajia.badou.adapter.ChongQuanAdapter;
 import com.jiajia.badou.adapter.MainPageFragmentAdapter;
 import com.jiajia.badou.bean.ChongQuanBean;
 import com.jiajia.badou.view.hfrecycler.HeaderAndFooterRecyclerView;
 import com.jiajia.presenter.bean.main.MainPageFragmentListBean;
+import com.jiajia.presenter.impl.Presenter;
 import com.jiajia.presenter.modle.main.LookFragmentMvpView;
 import com.jiajia.presenter.modle.main.LookFragmentPresenter;
 import com.jiajia.presenter.util.Strings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -71,6 +74,10 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
     initKePuView();
   }
 
+  @Override protected Presenter returnPresenter() {
+    return new LookFragmentPresenter();
+  }
+
   private void initKePuData() {
     mainPageFragmentListBeans.clear();
     mainPageFragmentListBeans.add(new MainPageFragmentListBean(
@@ -116,6 +123,7 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
   }
 
   private void initKePuView() {
+    final List<String> urls = Arrays.asList(getResources().getStringArray(R.array.kepu_url));
     kePuAdapter = new MainPageFragmentAdapter(activity, new ArrayList<MainPageFragmentListBean>());
 
     recyclerKePu.setHasFixedSize(true);
@@ -126,7 +134,7 @@ public class LookFragment extends BaseFragment<LookFragmentPresenter>
     kePuAdapter.setMainPageFragmentAdapterCallBack(
         new MainPageFragmentAdapter.MainPageFragmentAdapterCallBack() {
           @Override public void onClick(int position) {
-
+            startActivity(CommonWebViewActivity.callIntent(activity, urls.get(position)));
           }
         });
   }

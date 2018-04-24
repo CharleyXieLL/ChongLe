@@ -20,6 +20,9 @@ import com.jiajia.presenter.util.ToastUtil;
 
 public class CalendarView implements View.OnClickListener {
 
+  public static final String CALENDAR_BIRTHDAY = "calendar_birthday";
+  public static final String CALENDAR_NORMAL_TIME = "calendar_normal_time";
+
   private Activity sActivity;
   private Dialog dialog;
   private LinearLayout timepickLinear;
@@ -27,6 +30,8 @@ public class CalendarView implements View.OnClickListener {
 
   private CalendarViewCallBack calendarViewCallBack;
   private RelativeLayout relatCalendar;
+
+  private String calendarType;
 
   public CalendarView(Activity sActivity) {
     this.sActivity = sActivity;
@@ -111,7 +116,12 @@ public class CalendarView implements View.OnClickListener {
       String time = chooseTimeView.getTxt();
       calendarViewCallBack.setCalendarTime(time);
     } else {
-      ToastUtil.showToast(sActivity.getApplicationContext(), "不能选择今天之后", false);
+      if (calendarType.equals(CALENDAR_BIRTHDAY)) {
+        ToastUtil.showToast(sActivity.getApplicationContext(), "不能选择今天之后", false);
+      }
+      if (calendarType.equals(CALENDAR_NORMAL_TIME)) {
+        ToastUtil.showToast(sActivity.getApplicationContext(), "不能选择今天之前", false);
+      }
     }
   }
 
@@ -123,6 +133,11 @@ public class CalendarView implements View.OnClickListener {
       chooseTimeView.setTargetDays(days);
       selectDay();
     }
+  }
+
+  public void setCalendarType(String type) {
+    this.calendarType = type;
+    chooseTimeView.setCalendarType(type);
   }
 
   public String getTimeText() {

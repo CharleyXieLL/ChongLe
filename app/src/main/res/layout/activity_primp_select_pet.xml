@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+  <include layout="@layout/yq_base_title"/>
+
+  <TextView
+      android:id="@+id/tv_primp_select_pet"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="20dp"
+      android:text="选择宠物"
+      android:textSize="15sp"
+      style="@style/yq_text_black"
+      />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="10dp"
+      >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_primp_select_pet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:id="@+id/relat_primp_select_pet_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+      <ImageView
+          android:id="@+id/img_primp_select_pet_add"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:background="@mipmap/main_button_add"
+          />
+    </RelativeLayout>
+  </RelativeLayout>
+
+  <View
+      android:layout_marginTop="10dp"
+      style="@style/yq_line_style"
+      />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:paddingBottom="16dp"
+      android:paddingTop="16dp"
+      >
+    <TextView
+        android:text="联系电话"
+        android:textSize="@dimen/yq_body"
+        style="@style/yq_text_black"
+        />
+    <TextView
+        android:id="@+id/tv_primp_select_pet_phone"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/yj_black"
+        android:textSize="@dimen/yq_body"
+        tools:text="18317713207"
+        style="@style/yq_text_black"
+        />
+  </RelativeLayout>
+
+  <View
+      style="@style/yq_line_style"
+      />
+
+  <RelativeLayout
+      android:id="@+id/relat_primp_select_pet_time"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:paddingBottom="16dp"
+      android:paddingTop="16dp"
+      >
+    <TextView
+        android:text="预约日期"
+        android:textSize="@dimen/yq_body"
+        style="@style/yq_text_black"
+        />
+    <TextView
+        android:id="@+id/tv_primp_select_pet_time"
+        android:layout_alignParentRight="true"
+        android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/yj_arrow_left"
+        android:text="请选择"
+        android:textColor="@color/yq_color_a0a0a0"
+        android:textSize="@dimen/yq_body"
+        style="@style/yq_text_black"
+        />
+  </RelativeLayout>
+
+  <View
+      style="@style/yq_line_style"
+      />
+
+  <RelativeLayout
+      android:id="@+id/relat_primp_select_pet_time_hour"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:paddingBottom="16dp"
+      android:paddingTop="16dp"
+      >
+    <TextView
+        android:text="预约时间"
+        android:textSize="@dimen/yq_body"
+        style="@style/yq_text_black"
+        />
+    <TextView
+        android:id="@+id/tv_primp_select_pet_time_hour"
+        android:layout_alignParentRight="true"
+        android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/yj_arrow_left"
+        android:text="请选择"
+        android:textColor="@color/yq_color_a0a0a0"
+        android:textSize="@dimen/yq_body"
+        style="@style/yq_text_black"
+        />
+  </RelativeLayout>
+
+  <View
+      style="@style/yq_line_style"
+      />
+
+  <TextView
+      android:id="@+id/tv_primp_select_pet_submit"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginTop="60dp"
+      android:background="@drawable/shape_circle_main_ring"
+      android:gravity="center"
+      android:text="立即预约"
+      android:textColor="@color/white"
+      android:textSize="@dimen/yq_body"
+      />
+
+</LinearLayout>

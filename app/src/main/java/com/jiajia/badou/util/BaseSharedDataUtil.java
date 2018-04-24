@@ -85,12 +85,12 @@ public final class BaseSharedDataUtil {
     return getSharedPrefUtil(context).getString(PET_AVATAR, "");
   }
 
-  public static void setUserId(Context context, long userId) {
-    getSharedPrefUtil(context).putLong(USER_ID, userId).apply();
+  public static void setUserId(Context context, int userId) {
+    getSharedPrefUtil(context).putInt(USER_ID, userId).apply();
   }
 
-  public static long getUserId(Context context) {
-    return getSharedPrefUtil(context).getLong(USER_ID, 0);
+  public static int getUserId(Context context) {
+    return getSharedPrefUtil(context).getInt(USER_ID, 0);
   }
 
   private BaseSharedDataUtil() {
