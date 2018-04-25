@@ -14,7 +14,9 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.presenter.bean.mine.SelectPetsByOwnerBean;
+import com.jiajia.presenter.util.ViewUtil;
 import java.util.List;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Lei on 2018/4/24.
@@ -47,7 +49,11 @@ public class PrimpSelectPetAdapter extends RecyclerView.Adapter<PrimpSelectPetAd
   @SuppressLint("SetTextI18n") @Override public void onBindViewHolder(ViewHolder holder,
       @SuppressLint("RecyclerView") final int position) {
     SelectPetsByOwnerBean selectPetsByOwnerBean = mDatas.get(position);
-    Glide.with(context).load(selectPetsByOwnerBean.getPet_img()).into(holder.imgItemPrimpSelectPet);
+    Glide.with(context)
+        .load(selectPetsByOwnerBean.getPet_img())
+        .bitmapTransform(new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+            RoundedCornersTransformation.CornerType.ALL))
+        .into(holder.imgItemPrimpSelectPet);
     holder.tvItemPrimpSelectPetName.setText(selectPetsByOwnerBean.getPet_name());
     if (selectPetsByOwnerBean.isCheck()) {
       holder.imgItemPrimpSelectPetCheckTag.setVisibility(View.VISIBLE);

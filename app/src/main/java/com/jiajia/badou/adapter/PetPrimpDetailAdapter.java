@@ -13,7 +13,9 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.presenter.bean.PetPrimpDetailListBean;
+import com.jiajia.presenter.util.ViewUtil;
 import java.util.List;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Lei on 2018/4/24.
@@ -57,16 +59,36 @@ public class PetPrimpDetailAdapter extends RecyclerView.Adapter<PetPrimpDetailAd
     PetPrimpDetailListBean petPrimpDetailListBean = mDatas.get(position);
     if (type.equals(PetPrimpAdapter.MEI_RONG)) {
       if (position < imgMeiRong.length) {
-        Glide.with(context).load(imgMeiRong[position]).into(holder.imgItemPetPrimpDetail);
+        Glide.with(context)
+            .load(imgMeiRong[position])
+            .bitmapTransform(
+                new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+                    RoundedCornersTransformation.CornerType.ALL))
+            .into(holder.imgItemPetPrimpDetail);
       } else {
-        Glide.with(context).load(R.mipmap.jiesong).into(holder.imgItemPetPrimpDetail);
+        Glide.with(context)
+            .load(R.mipmap.jiesong)
+            .bitmapTransform(
+                new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+                    RoundedCornersTransformation.CornerType.ALL))
+            .into(holder.imgItemPetPrimpDetail);
       }
     }
     if (type.equals(PetPrimpAdapter.YI_LIAO)) {
       if (position < imgYiLiao.length) {
-        Glide.with(context).load(imgYiLiao[position]).into(holder.imgItemPetPrimpDetail);
+        Glide.with(context)
+            .load(imgYiLiao[position])
+            .bitmapTransform(
+                new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+                    RoundedCornersTransformation.CornerType.ALL))
+            .into(holder.imgItemPetPrimpDetail);
       } else {
-        Glide.with(context).load(R.mipmap.waike).into(holder.imgItemPetPrimpDetail);
+        Glide.with(context)
+            .load(R.mipmap.waike)
+            .bitmapTransform(
+                new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+                    RoundedCornersTransformation.CornerType.ALL))
+            .into(holder.imgItemPetPrimpDetail);
       }
     }
     if (petPrimpDetailListBean.isCheck()) {

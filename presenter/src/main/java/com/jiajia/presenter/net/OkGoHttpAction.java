@@ -49,11 +49,20 @@ public abstract class OkGoHttpAction<D> {
             }
           } else {
             try {
-              onResponseCodeFailed("网络请求错误", "400");
+              onResponseCodeFailed("网络连接失败", "400");
             } catch (Exception e) {
               e.printStackTrace();
             }
           }
+        }
+      }
+
+      @Override public void onError(Response<String> response) {
+        super.onError(response);
+        try {
+          onResponseCodeFailed("网络连接失败", "400");
+        } catch (Exception e) {
+          e.printStackTrace();
         }
       }
     });
@@ -87,11 +96,20 @@ public abstract class OkGoHttpAction<D> {
             }
           } else {
             try {
-              onResponseCodeFailed("网络请求错误", "400");
+              onResponseCodeFailed("网络连接失败", "400");
             } catch (Exception e) {
               e.printStackTrace();
             }
           }
+        }
+      }
+
+      @Override public void onError(Response<String> response) {
+        super.onError(response);
+        try {
+          onResponseCodeFailed("网络连接失败", "400");
+        } catch (Exception e) {
+          e.printStackTrace();
         }
       }
     });
@@ -130,11 +148,20 @@ public abstract class OkGoHttpAction<D> {
                 }
               } else {
                 try {
-                  onResponseCodeFailed("网络请求错误", "400");
+                  onResponseCodeFailed("网络连接失败", "400");
                 } catch (Exception e) {
                   e.printStackTrace();
                 }
               }
+            }
+          }
+
+          @Override public void onError(Response<String> response) {
+            super.onError(response);
+            try {
+              onResponseCodeFailed("网络连接失败", "400");
+            } catch (Exception e) {
+              e.printStackTrace();
             }
           }
         });

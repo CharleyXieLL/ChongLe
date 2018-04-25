@@ -19,8 +19,10 @@ import com.jiajia.badou.bean.event.EventActionUtil;
 import com.jiajia.badou.bean.event.EventBusAction;
 import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.util.BaseSharedDataUtil;
+import com.jiajia.badou.util.InterfaceUtil;
 import com.jiajia.badou.view.BigAvatarView;
 import com.jiajia.badou.view.CommonPopWindow;
+import com.jiajia.badou.view.ExitView;
 import com.jiajia.badou.view.ReportLendPeopleDialog;
 import com.jiajia.badou.view.SingleExitDialog;
 import com.jiajia.badou.view.UpLoadAvatarView;
@@ -147,9 +149,11 @@ public class PetCompileActivity extends BaseActivity<PetCompilePresenter>
       superTvPetVariety.setRightTextColor(ContextCompat.getColor(activity, R.color.yc_black));
       superTvPetGender.setRightString(selectPetsByOwnerBean.getPet_male());
       superTvPetGender.setRightTextColor(ContextCompat.getColor(activity, R.color.yc_black));
+      superTvSave.setVisibility(View.GONE);
     } else {
       apiBaseTitle.setText("添加宠物");
       tvBaseTitleRight.setVisibility(View.GONE);
+      superTvSave.setVisibility(View.VISIBLE);
     }
   }
 
@@ -262,14 +266,26 @@ public class PetCompileActivity extends BaseActivity<PetCompilePresenter>
         finish();
         break;
       case R.id.tv_base_title_right:
-        if (selectPetsByOwnerBean != null) {
-          showLoadingDialog("");
-          deleteHandler.postDelayed(new Runnable() {
-            @Override public void run() {
-              getPresenter().delPetsById(selectPetsByOwnerBean.getPet_id());
+        ExitView exitView = new ExitView(activity);
+        exitView.setMsg("删除当前宠物会导致正在预约中的订单失效，确认删除当前宠物吗？");
+        exitView.setExitViewCallBack(new InterfaceUtil.ExitViewCallBack() {
+          @Override public void exitViewLoginOut() {
+            dismissLoadingDialog();
+            if (selectPetsByOwnerBean != null) {
+              showLoadingDialog("");
+              deleteHandler.postDelayed(new Runnable() {
+                @Override public void run() {
+                  getPresenter().delPetsById(selectPetsByOwnerBean.getPet_id());
+                }
+              }, 600);
             }
-          }, 600);
-        }
+          }
+
+          @Override public void exitNegative() {
+
+          }
+        });
+
         break;
       case R.id.super_tv_pet_compile_pet_name:
         singleExitDialogName.showDialog();

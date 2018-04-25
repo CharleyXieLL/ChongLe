@@ -1,6 +1,12 @@
 apply plugin: 'com.android.library'
 
+def STRING = "String"
+
 android {
+  //http://stackoverflow.com/a/40047972/3171537
+  def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
+  def CONFIG_RELEASE_URL = CONFIG('RELEASE_BASE_URL')
+
   compileSdkVersion 26
 
   defaultConfig {
@@ -10,6 +16,8 @@ android {
     versionName "1.0"
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    buildConfigField STRING, "API_URL", CONFIG_RELEASE_URL
   }
 
   buildTypes {
