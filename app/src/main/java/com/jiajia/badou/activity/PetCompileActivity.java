@@ -285,7 +285,7 @@ public class PetCompileActivity extends BaseActivity<PetCompilePresenter>
 
           }
         });
-
+        exitView.showDialog();
         break;
       case R.id.super_tv_pet_compile_pet_name:
         singleExitDialogName.showDialog();

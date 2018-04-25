@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">宠乐</string>
 
-  <string name="cl_title_select_all_order">预约订单</string>
+  <string name="cl_title_select_all_order">我的订单</string>
 
   <string name="yq_pop_authorization_title">授权提醒</string>
   <string name="yq_pop_authorization_tips">申请借款，需要同意“宠乐”访问您的通讯录及地理位置,请打开您的相关权限后才能完成借款</string>

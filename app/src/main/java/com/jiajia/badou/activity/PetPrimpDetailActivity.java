@@ -78,6 +78,7 @@ public class PetPrimpDetailActivity extends BaseActivity<PetPrimpDetailPresenter
   private int petId = PetPrimpDetailAdapter.NO_DATA;
 
   private Handler handler = new Handler();
+  private TextView tvPrimpServiceTitle;
 
   public static Intent callIntent(Context context, String type, PetPrimpBean petPrimpBean) {
     Intent intent = new Intent(context, PetPrimpDetailActivity.class);
@@ -107,8 +108,11 @@ public class PetPrimpDetailActivity extends BaseActivity<PetPrimpDetailPresenter
 
   private void getData() {
     if (!from.equals(PetPrimpAdapter.JI_YANG)) {
+      tvPrimpServiceTitle.setVisibility(View.VISIBLE);
       showLoadingDialog("");
       getPresenter().selectAllService();
+    } else {
+      tvPrimpServiceTitle.setVisibility(View.GONE);
     }
   }
 
@@ -122,6 +126,7 @@ public class PetPrimpDetailActivity extends BaseActivity<PetPrimpDetailPresenter
     tvAddress = headerView.findViewById(R.id.tv_address_pet_primp_detail);
     tvPhone = headerView.findViewById(R.id.tv_phone_pet_primp_detail);
     layoutTitleContent = headerView.findViewById(R.id.layout_title_content_pet_primp_detail);
+    tvPrimpServiceTitle = headerView.findViewById(R.id.tv_primp_detail_service_title);
 
     relatBack.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {

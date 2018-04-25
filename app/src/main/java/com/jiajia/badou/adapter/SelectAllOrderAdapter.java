@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.jiajia.badou.R;
 import com.jiajia.presenter.bean.mine.SelectAllOrderBean;
 import com.jiajia.presenter.bean.mine.SelectPetsByOwnerBean;
+import com.jiajia.presenter.util.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Lei on 2018/4/24.
@@ -51,10 +53,14 @@ public class SelectAllOrderAdapter extends RecyclerView.Adapter<SelectAllOrderAd
   @SuppressLint("SetTextI18n") @Override public void onBindViewHolder(ViewHolder holder,
       @SuppressLint("RecyclerView") final int position) {
     SelectAllOrderBean selectAllOrderBean = mDatas.get(position);
-    Glide.with(context).load(selectAllOrderBean.getPet_img()).into(holder.imgItemSelectAllOrder);
+    Glide.with(context)
+        .load(selectAllOrderBean.getPet_img())
+        .bitmapTransform(new RoundedCornersTransformation(context, ViewUtil.dp2px(context, 8), 0,
+            RoundedCornersTransformation.CornerType.ALL))
+        .into(holder.imgItemSelectAllOrder);
     holder.tvPetName.setText(selectAllOrderBean.getPet_name());
-    holder.tvItemSelectAllOrderStore.setText(selectAllOrderBean.getStore());
-    holder.tvItemSelectAllOrderType.setText(selectAllOrderBean.getOrderType());
+    holder.tvItemSelectAllOrderStore.setText("预约门店：" + selectAllOrderBean.getStore());
+    holder.tvItemSelectAllOrderType.setText("预约内容：" + selectAllOrderBean.getOrderType());
   }
 
   public void addAll(List<SelectAllOrderBean> datas) {
@@ -88,8 +94,10 @@ public class SelectAllOrderAdapter extends RecyclerView.Adapter<SelectAllOrderAd
         indexs.add(i);
       }
     }
+    int i = 0;
     for (int k = 0; k < indexs.size(); k++) {
-      mDatas.remove(k);
+      mDatas.remove(indexs.get(k) - i);
+      i++;
     }
     for (int p = 0; p < mDatas.size(); p++) {
       for (int z = 0; z < selectPetsByOwnerBeans.size(); z++) {
