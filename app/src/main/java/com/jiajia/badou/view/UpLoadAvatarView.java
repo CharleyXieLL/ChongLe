@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import com.jiajia.presenter.util.ChongLeConfig;
 import com.jiajia.presenter.util.ToastUtil;
 import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.compress.CompressConfig;
 import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TakePhotoOptions;
 import java.io.File;
@@ -72,7 +73,7 @@ public class UpLoadAvatarView {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 });
               } else {
-                photoPicker.pickFromGallery();
+                takePhotoSelectImage(takePhoto);
               }
             }
 
@@ -106,6 +107,12 @@ public class UpLoadAvatarView {
     takePhoto.onPickFromCaptureWithCrop(imageUri, getCropOptions());
   }
 
+  private void takePhotoSelectImage(TakePhoto takePhoto) {
+    configCompress(takePhoto);
+    configTakePhotoOption(takePhoto);
+    takePhoto.onPickFromGallery();
+  }
+
   private void configTakePhotoOption(TakePhoto takePhoto) {
     TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
     builder.setWithOwnGallery(true);
@@ -114,7 +121,11 @@ public class UpLoadAvatarView {
   }
 
   private void configCompress(TakePhoto takePhoto) {
-    takePhoto.onEnableCompress(null, false);
+    CompressConfig config = new CompressConfig.Builder().setMaxPixel(1000)
+        .setMaxSize(200 * 1024)
+        .enableReserveRaw(true)//拍照后是否保存原图
+        .create();
+    takePhoto.onEnableCompress(config, false);
   }
 
   private CropOptions getCropOptions() {

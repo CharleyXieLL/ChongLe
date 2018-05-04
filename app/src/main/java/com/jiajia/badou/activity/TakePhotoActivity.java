@@ -77,6 +77,7 @@ public abstract class TakePhotoActivity extends BaseActivity
   }
 
   @Override public void takeSuccess(TResult result) {
+
   }
 
   @Override public void takeFail(TResult result, String msg) {

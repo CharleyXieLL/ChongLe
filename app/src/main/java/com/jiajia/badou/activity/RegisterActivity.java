@@ -84,7 +84,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
   }
 
   @Override protected void init() {
-    setPresenter(new RegisterPresenter());
     setStatusBar();
     initGetVerifyCodeTimeUtil();
     initEditText();
