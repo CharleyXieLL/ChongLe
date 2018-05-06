@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jiajia.badou.R;
 import com.jiajia.badou.adapter.ReportLendPeopleAdapter;
 import com.jiajia.badou.bean.event.EventActionUtil;
@@ -224,8 +225,11 @@ public class PetCompileActivity extends BaseActivity<PetCompilePresenter>
       upLoadAvatarView = new UpLoadAvatarView(PetCompileActivity.this, getTakePhoto());
       upLoadAvatarView.setUpLoadAvatarViewCallBack(new UpLoadAvatarView.UpLoadAvatarViewCallBack() {
         @Override public void onTakeSuccess(String path) {
+          BaseSharedDataUtil.setPetAvatar(activity, path);
           Glide.with(PetCompileActivity.this)
               .load(path)
+              .skipMemoryCache(true)
+              .diskCacheStrategy(DiskCacheStrategy.NONE)
               .error(R.mipmap.ic_launcher)
               .into(imgAvatar);
         }
@@ -392,6 +396,8 @@ public class PetCompileActivity extends BaseActivity<PetCompilePresenter>
     BaseSharedDataUtil.setPetAvatar(activity, result.getImage().getOriginalPath());
     Glide.with(PetCompileActivity.this)
         .load(result.getImage().getOriginalPath())
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .error(R.mipmap.ic_launcher)
         .into(imgAvatar);
   }
