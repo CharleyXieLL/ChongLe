@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +19,7 @@ import com.jiajia.badou.bean.event.EventActionUtil;
 import com.jiajia.badou.bean.event.EventBusAction;
 import com.jiajia.badou.util.ActManager;
 import com.jiajia.badou.util.BaseSharedDataUtil;
+import com.jiajia.badou.util.NoScrollGridLayoutManager;
 import com.jiajia.badou.view.CommonPopWindow;
 import com.jiajia.badou.view.wheelview.CalendarView;
 import com.jiajia.presenter.bean.InsertOrderPost;
@@ -130,7 +130,7 @@ public class PrimpSelectPetActivity extends BaseActivity<PrimpSelectPetPresenter
 
   private void initRecycleView() {
     adapter = new PrimpSelectPetAdapter(activity, new ArrayList<SelectPetsByOwnerBean>());
-    recyclerviewPrimpSelectPet.setLayoutManager(new GridLayoutManager(activity, 3));
+    recyclerviewPrimpSelectPet.setLayoutManager(new NoScrollGridLayoutManager(activity, 3));
     recyclerviewPrimpSelectPet.setHasFixedSize(true);
     recyclerviewPrimpSelectPet.setAdapter(adapter);
 
