@@ -122,7 +122,7 @@ public class UpLoadAvatarView {
 
   private void configCompress(TakePhoto takePhoto) {
     CompressConfig config = new CompressConfig.Builder().setMaxPixel(1000)
-        .setMaxSize(200 * 1024)
+        .setMaxSize(100 * 1024)
         .enableReserveRaw(true)//拍照后是否保存原图
         .create();
     takePhoto.onEnableCompress(config, false);
